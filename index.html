@@ -1,0 +1,292 @@
+<!DOCTYPE HTML>
+<!--
+	Hyperspace by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>CSGO Data Visualisation</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Sidebar -->
+			<section id="sidebar">
+				<div class="inner">
+					<nav>
+						<ul>
+							<li><a href="#intro">Présentation du projet</a></li>
+							<li><a href="#one">Choix de la carte et de l'équipe</a></li>
+							<li><a href="#two">Quelles armes choisir ?</a></li>
+							<li><a href="#three">Où se positionner ?</a></li>
+							<li><a href="#four">La stratégie à adopter ?</a></li>
+						</ul>
+					</nav>
+				</div>
+			</section>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Intro -->
+					<section id="intro" class="wrapper style1 fullscreen fade-up">
+						<div class="inner">
+						<center>
+							<h1>Visualisation des données du jeu</h1>
+							<a href="https://store.steampowered.com/app/730/CounterStrike_Global_Offensive/?l=french">
+							<img height=200 src="images/logo.png" /></a>
+
+							<h2> Par Dewone MORCHOISNE et Brice MARC </h2>
+							</center>
+
+							<h2>Présentation du jeu </h2>
+							Counter-Strike : Global Offensive (abrégé CS:GO) est un jeu de tir à la première personne multijoueur en ligne basé sur le jeu d'équipe développé par Valve Corporation.
+							<br>
+							Les joueurs sont divisés en deux équipes de 5 joueurs, les terroristes et les antiterroristes.
+							<br>
+							Les terroristes doivent poser une bombe et la faire exploser ou bien éliminer la totalité des antiterroristes. Les antiterroristes doivent, eux, empêcher les terroristes de poser la bombe durant le temps de la manche, la désamorcer si elle parvient à être posée ou éliminer tous les terroristes. À noter que si les antiterroristes ont éliminé tous les terroristes, mais que la bombe, si elle a été posée, n'est pas désamorcée et explose, la victoire revient aux terroristes. 
+							<br>
+							Chaque partie est jouée en 30 manches. L'équipe gagnant 16 manches l'emporte, mais le match se termine par une égalité (15-15) si aucune des deux équipes n'a atteint 16 à la fin de la 30e manche.
+							<br> 
+
+							<h2>Objectif du projet </h2>
+							L'objectif du projet est de déterminer une stratégie pour maximiser ses chances de victoire, via l'analyse des données.
+							<br> Trois axes principaux sont développés : le choix de l'arme, le positionnement sur la carte et les différentes stratégies à adopter.
+
+						</div>
+					</section>
+					
+					<!-- Intro -->
+					<section id="one" class="wrapper style1 fullscreen fade-up">
+						<div class="inner">
+							<h1>Choix de l'équipe</h1>
+							<ul class="actions">
+								<li>
+									<input type="radio" id="T" name="side" value="Terrorist" checked/>
+									<label for="T"><img height=200 src="images/logo_side/T_logo.png" /><br> <center><strong><p style="background-color: white; color:#D37F21";>Terrorist</p></strong></center></label>
+								</li>
+								<li>
+									<input type="radio" id="CT" name="side" value="Terrorist" />
+									<label for="CT"><img height=200 src="images/logo_side/CT_logo.png" /> <br> <center><strong><p style="background-color: white; color:#2B53DE";>Counter-Terrorist</p></strong></center></label>
+								</li>
+							</ul>
+							<h1>Choix de la carte</h1>
+
+								<input type="radio" id="cache"  value="de_cache" name="map"checked/>
+									<label for="cache"><img height=150 src="images/logo_maps/cache_logo.png" /></label>
+								<input type="radio" id="cobble"  value="de_cbble" name="map"/>
+									<label for="cobble"><img height=150 src="images/logo_maps/cobble_logo.png" /></label>
+								<input type="radio" id="dust"  value="de_dust2" name="map"/>
+									<label for="dust"><img height=150 src="images/logo_maps/dust_logo.png" /></label>
+								<br>
+								<input type="radio" id="inferno"  value="de_inferno" name="map"/>
+									<label for="inferno"><img height=150 src="images/logo_maps/inferno_logo.png" /></label>
+								<input type="radio" id="mirage"  value="de_mirage" name="map"/>
+									<label for="mirage"><img height=150 src="images/logo_maps/mirage_logo.png" /></label>
+								<input type="radio" id="overpass"  value="de_overpass" name="map"/>
+									<label for="overpass"><img height=150 src="images/logo_maps/overpass_logo.png" /></label>
+								<input type="radio" id="train"  value="de_train" name="map"/>
+									<label for="train"><img height=150 src="images/logo_maps/train_logo.png" /></label>
+								
+							<h1>Choix des rangs à observer</h1>
+							<input type="checkbox" id="s1"  value="1" name="rank" checked/>
+									<label for="s1"><img height=75 width=150 src="images/logo_ranks/s1_logo.jpg" /><br> <center>Silver 1</center></label>
+							<input type="checkbox" id="s2"  value="2" name="rank" checked/>
+									<label for="s2"><img height=75 width=150 src="images/logo_ranks/s2_logo.jpg" /><br> <center>Silver 2</center></label>
+							<input type="checkbox" id="s3"  value="3" name="rank" checked/>
+									<label for="s3"><img height=75 width=150 src="images/logo_ranks/s3_logo.jpg" /><br> <center>Silver 3</center></label>
+							<input type="checkbox" id="s4"  value="4" name="rank" checked/>
+									<label for="s1"><img height=75 width=150 src="images/logo_ranks/s4_logo.jpg" /><br> <center>Silver 4</center></label>
+							<input type="checkbox" id="s5"  value="5" name="rank" checked/>
+									<label for="s1"><img height=75 width=150 src="images/logo_ranks/s5_logo.jpg" /><br> <center>Silver 5</center></label>	
+							<input type="checkbox" id="se"  value="6" name="rank" checked/>
+									<label for="s1"><img height=75 width=150 src="images/logo_ranks/se_logo.jpg" /><br> <center>Silver Elite</center></label>
+							<input type="checkbox" id="g1"  value="7" name="rank" checked/>
+									<label for="g1"><img height=75 width=150 src="images/logo_ranks/g1_logo.jpg" /><br> <center>Gold Nova 1</center></label>
+							<input type="checkbox" id="g2"  value="8" name="rank" checked/>
+									<label for="g2"><img height=75 width=150 src="images/logo_ranks/g2_logo.jpg" /><br> <center>Gold Nova 2</center></label>
+							<input type="checkbox" id="g3"  value="9" name="rank" checked/>
+									<label for="g3"><img height=75 width=150 src="images/logo_ranks/g3_logo.jpg" /><br> <center>Gold Nova 3</center></label>
+							<input type="checkbox" id="g4"  value="10" name="rank" checked/>
+									<label for="g4"><img height=75 width=150 src="images/logo_ranks/g4_logo.jpg" /><br> <center>Gold Nova Master</center></label>
+							<input type="checkbox" id="mg1"  value="11" name="rank" checked/>
+									<label for="mg"><img height=75 width=150 src="images/logo_ranks/mg_logo.jpg" /><br> <center>MG 1</center></label>
+							<input type="checkbox" id="mg2"  value="12" name="rank" checked/>
+									<label for="mg2"><img height=75 width=150 src="images/logo_ranks/mge_logo.jpg" /><br> <center>MG 2</center></label>
+							<input type="checkbox" id="mge"  value="13" name="rank" checked/>
+									<label for="mge"><img height=75 width=150 src="images/logo_ranks/mgee_logo.jpg" /><br> <center>MG Elite</center></label>
+							<input type="checkbox" id="dmge"  value="14" name="rank" checked/>
+									<label for="dmge"><img height=75 width=150 src="images/logo_ranks/e_logo.jpg" /><br> <center>DMGE</center></label>
+							<input type="checkbox" id="le"  value="15" name="rank" checked/>
+									<label for="le"><img height=75 width=150 src="images/logo_ranks/le_logo.jpg" /><br> <center>Legendary Eagle</center></label>
+							<input type="checkbox" id="lem"  value="16" name="rank" checked/>
+									<label for="lem"><img height=75 width=150 src="images/logo_ranks/lem_logo.jpg" /><br> <center>LE Master</center></label>
+							<input type="checkbox" id="sm"  value="17" name="rank" checked/>
+									<label for="sm"><img height=75 width=150 src="images/logo_ranks/sm_logo.jpg" /><br> <center>Supreme M</center></label>
+							<input type="checkbox" id="ge"  value="18" name="rank" checked/>
+									<label for="ge"><img height=75 width=150 src="images/logo_ranks/gom_logo.jpg" /><br> <center>Global Elite</center></label>
+						</div>
+					</section>
+
+				<!-- One -->
+					<section id="two" class="wrapper style2 spotlights">
+						<section>
+							<div class="content">
+								<div class="inner">
+									<h2>Statistiques Générales sur les différentes armes</h2>
+									<p>Au début de chaque round, le joueur peut acheter des armes en fonction de son économie. Chaque arme à un prix et des caractéristiques propres.</p>
+								</div>
+							</div>
+						</section>
+						<table>
+							<tr>
+								<td>
+									<select name="histo" id="histo-select">
+									    <option value="1" selected="selected">Dégats moyens par tir</option>
+									    <option value="2">Fréquence d'utilisation (par tirs touchés)</option>
+									    <option value="3">Pourcentage de rounds gagnés</option>
+									    <option value="4">Pourcentage de Headshot</option>
+									</select>
+								<br></br>
+								<center>
+						      		<img height=300 width=400 src="images/test.png" />		
+						      	</center>
+							</td>
+								<td>
+									<select name="histo" id="histo-select">
+									    <option value="1">Dégats moyens par tir</option>
+									    <option value="2" selected="selected">Fréquence d'utilisation (par tirs touchés)</option>
+									    <option value="3">Pourcentage de rounds gagnés</option>
+									    <option value="4">Pourcentage de Headshot</option>
+									</select>
+									<br></br>
+									<center>
+							      		<img height=300 width=400 src="images/test.png" />		
+							      	</center>
+								</td>
+							</tr>
+						</table>
+
+						<section>
+							<img src="images/wp/shop.png" alt="" data-position="25% 25%" id="wp_image" height=400 width=400/>
+							<div class="content">
+								<div class="inner">
+									<p>Distance d'utilisation efficace pour chaque arme </p>
+									<select name="weapon" id="wp" onchange="image_wp()">
+										<option value="shop" selected="selected">Choix de l'arme</option>
+									    <option value="AK47">AK47</option>
+									</select>
+									<center>
+										<img height=250 width=700 src="images/test.png" />
+									</center>
+								</div>
+							</div>
+							<script>
+								function image_wp() {
+								var img = document.getElementById("wp_image");
+								  img.src = "images/wp/"+document.getElementById("wp").value+".png";
+								}
+							</script>
+							
+							<!-- <div class="content">
+								<div class="inner">
+									<h2><select name="weapon" id="wp">
+										<option value="0" selected="selected">Choix de l'arme</option>
+									    <option value="AK47">AK47</option>
+									</select></h2>
+									<p>Phasellus convallis elit id ullamcorper pulvinar. Duis aliquam turpis mauris, eu ultricies erat malesuada quis. Aliquam dapibus.</p>
+									<ul class="actions">
+										<li><a href="generic.html" class="button">Learn more</a></li>
+									</ul>
+								</div>
+							</div> -->
+						</section>
+					</section>
+
+				<!-- Two -->
+					<section id="three" class="wrapper style3 fade-up">
+						<div class="inner">
+							<h2>Où se positionner ?</h2>
+							<select name="weapon2" id="wp2">
+								<option value="shop" selected="selected">Choix de l'arme</option>
+								<option value="AK47">AK47</option>
+							</select>
+							
+							<center>
+								<img height=550 width=550 src="images/test2.png" />
+							</center>
+							
+							<select name="type_map" id="type_map">
+								<option value="0" selected="selected"> Données représentées </option>
+								<option value="1" >Lignes de tirs touchés avec l'arme choisie</option>
+								<option value="2">Position du tireur lors de tirs touchés avec l'arme choisie</option>
+								<option value="3">Position des victimes des tirs ennemis</option>
+							</select>
+							
+						</div>
+					</section>
+
+				<!-- Four -->
+					<section id="four" class="wrapper style1 fade-up">
+						<div class="inner">
+							<h2> La stratégie à adopter ? </h2>
+							<h3>Où planter la bombe ?</h3>
+							<p> Planter la bombe est un objectif important pour l'équipe Terrorist car il permet de gagner plus de crédits au round suivant et permet à l'équipe de se retrouver dans une position plus confortable. Il y a deux sites où l'on peut planter la bombe, et leur accessibilité va dépendre de l'économie des attaquants par rapport à celle des défenseurs.
+							<select name="type_map" id="type_map">
+								<option value="0" selected="selected"> Type de round </option>
+								<option value="1" >Eco</option>
+								<option value="2">Semi-Eco</option>
+								<option value="3">Force Buy</option>
+								<option value="4">Full Buy</option>
+							</select>
+							<table>
+								<tr>
+									<td>
+									<center>
+							      		<img height=300 width=400 src="images/test.png" />
+							      		<p>Site où la bombe a été plantée</p>		
+							      	</center>
+								</td>
+									<td>
+										<center>
+								      		<img height=300 width=400 src="images/test.png" />		
+								      		<p>Pourcentage de victoire par site où la bombe a été plantée</p>	
+								      	</center>
+									</td>
+								</tr>
+							</table>
+							<h3>Gestion de l'économie</h3>
+							<p>La gestion de l'économie est un aspect important de CSGO puisqu'une équipe ne pouvant acheter les meilleures armes à moins de chance de remporter le round. Il est donc préférable d'économiser de temps en temps en achetant rien que d'acheter tout le temps des armes moyennes.</p>
+							<center>
+					      		<img height=300 width=400 src="images/test.png" />
+							 </center>
+						</div>
+					</section>
+
+
+			</div>
+
+		<!-- Footer -->
+			<footer id="footer" class="wrapper style1-alt">
+				<div class="inner">
+					<ul class="menu">
+						<li>&copy; Untitled. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+					</ul>
+				</div>
+			</footer>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
