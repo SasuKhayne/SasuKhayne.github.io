@@ -525,22 +525,12 @@ linechart = (container, dataset) => {
     }
 
 
-async function main() {
-
-  map = "de_cache";
-
-  rank = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16];
-
-  side = "Terrorist";
-
-  attr = "att";
-
-  wp = "Toutes";
+async function main(map, rank, side, attr, wp) {
 
   var csv = d3.csv("/data/ligth2.csv");
 
   data = [];
-  
+
   csv = await csv.then((a)=>data.push(a));
   data = data[0];
 
@@ -609,7 +599,13 @@ densityplot("#chart_map", data, side, attr);
 
 }
 
-main();
+map = "de_cache";
+rank = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16];
+side = "Terrorist";
+attr = "att";
+wp = "Toutes";
+
+main(map = "de_cache", rank = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16], side = "Terrorist", attr = "att", wp = "Toutes");
 
 
 

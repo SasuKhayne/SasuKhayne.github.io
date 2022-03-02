@@ -78,9 +78,9 @@
 								</li>
 							</ul>
 							<script>
-								var side = document.querySelector('input[name="side"]:checked').value;
 								function change_side() {
 								var side = document.querySelector('input[name="side"]:checked').value;
+								main(map, rank, side, attr, wp);
 								}
 							</script>
 							<h1>Choix de la carte</h1>
@@ -102,9 +102,9 @@
 									<label for="train"><img height=150 src="images/logo_maps/train_logo.png" /></label>
 								
 								<script>
-									var map = document.querySelector('input[name="map"]:checked').value;
 									function change_map() {
 									var map = document.querySelector('input[name="map"]:checked').value;
+									main(map, rank, side, attr, wp);
 									}
 								</script>
 							<h1>Choix des rangs à observer</h1>
@@ -145,16 +145,6 @@
 							<input type="checkbox" id="ge"  value="18" name="rank" onchange="change_rank()" checked/>
 									<label for="ge"><img height=75 width=150 src="images/logo_ranks/gom_logo.jpg" /><br> <center>Global Elite</center></label>
 							<script>
-								var checkboxes = document.getElementsByName("rank");
-								var checkboxesChecked = [];
-								// loop over them all
-								for (var i=0; i<checkboxes.length; i++) {
-									// And stick the checked ones onto an array...
-									if (checkboxes[i].checked) {
-										checkboxesChecked.push(checkboxes[i]);
-									}
-								}
-								var rank = checkboxesChecked;
 								function change_rank() {
 									var checkboxes = document.getElementsByName("rank");
 									var checkboxesChecked = [];
@@ -167,6 +157,7 @@
 									}
 								var rank = checkboxesChecked;
 								console.log(rank);
+								main(map, rank, side, attr, wp);
 								}
 							</script>
 						</div>
