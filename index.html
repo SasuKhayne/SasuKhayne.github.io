@@ -300,13 +300,20 @@
 							<h2> La stratégie à adopter ? </h2>
 							<h3>Où planter la bombe ?</h3>
 							<p> Planter la bombe est un objectif important pour l'équipe Terrorist car il permet de gagner plus de crédits au round suivant et permet à l'équipe de se retrouver dans une position plus confortable. Il y a deux sites où l'on peut planter la bombe, et leur accessibilité va dépendre de l'économie des attaquants par rapport à celle des défenseurs.
-							<select name="type_map" id="type_map">
+							<select name="eco" id="eco" onchange="change_eco()">
 								<option value="0" selected="selected"> Type de round </option>
-								<option value="1" >Eco</option>
-								<option value="2">Semi-Eco</option>
-								<option value="3">Force Buy</option>
-								<option value="4">Full Buy</option>
+								<option value="ECO" >Eco</option>
+								<option value="SEMI-ECO">Semi-Eco</option>
+								<option value="FORCE BUY">Force Buy</option>
+								<option value="NORMAL">Full Buy</option>
+								<option value="PISTOL_ROUND">Pistol Round</option>
 							</select>
+							<script>
+								var round_type = document.getElementById("eco").value;
+								function change_eco() {
+								var round_type = document.getElementById("eco").value;
+								}
+							</script>
 							<table>
 								<tr>
 									<td>
