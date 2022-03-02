@@ -185,7 +185,7 @@
 						<table>
 							<tr>
 								<td>
-									<select name="histo" id="histo-select">
+									<select name="histo1" id="histo-select1">
 									    <option value="1" selected="selected">Dégats moyens par tir</option>
 									    <option value="2">Fréquence d'utilisation (par tirs touchés)</option>
 									    <option value="3">Pourcentage de rounds gagnés</option>
@@ -193,11 +193,11 @@
 									</select>
 								<br></br>
 								<center>
-						      		<img height=300 width=400 src="images/test.png" />		
+									<div id="chart_histo1"></div>		
 						      	</center>
 							</td>
 								<td>
-									<select name="histo" id="histo-select">
+									<select name="histo2" id="histo-select2">
 									    <option value="1">Dégats moyens par tir</option>
 									    <option value="2" selected="selected">Fréquence d'utilisation (par tirs touchés)</option>
 									    <option value="3">Pourcentage de rounds gagnés</option>
@@ -242,7 +242,8 @@
 								  img.src = "images/wp/"+document.getElementById("wp").value+".png";
 								  var wp = document.getElementById("wp").value;
 								  document.getElementById("wp2").value = wp;
-								  linechart("#chart_dist", dmg_dist);
+								  document.getElementById("chart_dist").innerHTML = '';
+								  linechart("#chart_dist", dmg_distance(data, wp));
 								}
 							</script>
 							

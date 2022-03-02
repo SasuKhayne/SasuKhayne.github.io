@@ -582,17 +582,27 @@ dmg_dist = dmg_distance(data, wp);
 
 BarChartEco("#chart_eco", eco_data_rollup);
 
-BarChart("#chart_histo2", weapons, {
+BarChart("#chart_histo2", weapons_mod, {
   x: d => d.wp,
-  y: d => d.hs/d.frequency*100,
-  xDomain: d3.groupSort(weapons, ([d]) => -d.hs/d.frequency, d => d.wp), // sort by descending frequency
-  yLabel: "Pourcentage de headshot",
+  y: d => d.frequency/d3.sum(weapons_mod, d => d.frequency),
+  xDomain: d3.groupSort(weapons_mod, ([d]) => -d.frequency, d => d.wp), // sort by descending frequency
+  yLabel: "Fréquence d'utilisation (par tirs touchés)",
   width,
   height: 500,
   color: couleur[side]
-});
+})
 
 linechart("#chart_dist", dmg_dist);
+
+BarChart("#chart_histo1", weapons_mod, {
+  x: d => d.wp,
+  y: d => d.avg_dmg,
+  xDomain: d3.groupSort(weapons_mod, ([d]) => -d.avg_dmg, d => d.wp), // sort by descending frequency
+  yLabel: "Dégâts moyen par tir touché",
+  width,
+  height: 500,
+  color: couleur[side]
+})
 
 }
 
