@@ -79,7 +79,7 @@
 							</ul>
 							<script>
 								function change_side() {
-								var side = document.querySelector('input[name="side"]:checked').value;
+								side = document.querySelector('input[name="side"]:checked').value;
 								main(map, rank, side, attr, wp);
 								}
 							</script>
@@ -103,7 +103,7 @@
 								
 								<script>
 									function change_map() {
-									var map = document.querySelector('input[name="map"]:checked').value;
+									map = document.querySelector('input[name="map"]:checked').value;
 									main(map, rank, side, attr, wp);
 									}
 								</script>
@@ -155,7 +155,7 @@
 										checkboxesChecked.push(checkboxes[i].value);
 										}
 									}
-								var rank = checkboxesChecked;
+								rank = checkboxesChecked;
 								console.log(rank);
 								main(map, rank, side, attr, wp);
 								}
@@ -185,6 +185,9 @@
 								<br></br>
 								<center>
 									<div id="chart_histo1"></div>		
+									<script>
+
+									</script>
 						      	</center>
 							</td>
 								<td>
@@ -228,10 +231,9 @@
 							</script>
 							<script>
 								function image_wp() {
-								var wp = document.getElementById("wp").value;
 								var img = document.getElementById("wp_image");
 								  img.src = "images/wp/"+document.getElementById("wp").value+".png";
-								  var wp = document.getElementById("wp").value;
+								  wp = document.getElementById("wp").value;
 								  document.getElementById("wp2").value = wp;
 								  document.getElementById("chart_dist").innerHTML = '';
 								  linechart("#chart_dist", dmg_distance(data, wp));
@@ -276,10 +278,9 @@
 
 							<script>
 								function change_wp() {
-								var wp = document.getElementById("wp2").value;
+								wp = document.getElementById("wp2").value;
 								var img = document.getElementById("wp_image");
 								img.src = "images/wp/"+document.getElementById("wp2").value+".png";
-								var wp = document.getElementById("wp2").value;
 								document.getElementById("wp").value = wp;
 								}
 							</script>
@@ -298,12 +299,12 @@
 
 							<script>
 								var type_visu = document.getElementById("type_map").value;
-								if(type_visu==1 || type_visu==3){var attr = "att";}
-								else {var attr = "vic";}
+								if(type_visu==1 || type_visu==3){attr = "att";}
+								else {attr = "vic";}
 								function att_vic() {
 								var type_visu = document.getElementById("type_map").value;
-								if(type_visu==1 || type_visu==3){var attr = "att";}
-								else {var attr = "vic";}
+								if(type_visu==1 || type_visu==3){attr = "att";}
+								else {attr = "vic";}
 								}
 							</script>
 							
