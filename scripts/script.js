@@ -415,7 +415,7 @@ linechart = (container, dataset) => {
 
   densityplot = (container, dataset, side, attr) => {
     document.getElementById(container.substr(1)).innerHTML = '';
-    const svg = d3.select(container).append("svg")//select(DOM.svg(width, height));
+    const svg = d3.select(container).append("svg").attr("width", 512).attr("lenght", 512);
       
       var node = svg.selectAll("g.node")
         .data(dataset)
