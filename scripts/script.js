@@ -412,8 +412,8 @@ linechart = (container, dataset) => {
     return svg.node()
   }
 
-  densityplot = (dataset, side, attr) => {
-    const svg = d3.select(DOM.svg(width, height));
+  densityplot = (container, dataset, side, attr) => {
+    const svg = d3.select(container).select(DOM.svg(width, height));
       
       var node = svg.selectAll("g.node")
         .data(dataset)
@@ -539,7 +539,8 @@ async function main() {
 
   var csv = d3.csv("/data/ligth2.csv");
 
-  var data = [];
+  data = [];
+  
   csv = await csv.then((a)=>data.push(a));
   data = data[0];
 
@@ -603,6 +604,8 @@ BarChart("#chart_histo1", weapons_mod, {
   height: 500,
   color: couleur[side]
 })
+
+densityplot("#chart_map", data, side, attr);
 
 }
 
