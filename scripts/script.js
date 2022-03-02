@@ -198,7 +198,7 @@ function BarChartEco(container, data, {
     title = i => T(O[i], i, data);
   }
 
-  const svg = d3.select(container).append(svg)
+  const svg = d3.select(container).append("svg")
       .attr("width", width)
       .attr("height", height)
       .attr("viewBox", [0, 0, width, height])
