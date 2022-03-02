@@ -11,6 +11,9 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<link rel="icon" href="images/logo.ico" />
+		<script src="https://d3js.org/d3.v7.min.js"></script>
+		<script src="scripts/script.js"></script>
 	</head>
 	<body class="is-preload">
 
@@ -209,19 +212,29 @@
 						</table>
 
 						<section>
-							<img src="images/wp/Toutes.png" alt="" data-position="25% 25%" id="wp_image" height=400 width=400/>
+							<img src="images/wp/Toutes.png" alt="" data-position="25% 25%" id="wp_image" height=400 width=400 onerror="this.src='images/wp/default2.jpg'" alt=""/>
 							<div class="content">
 								<div class="inner">
 									<p>Distance d'utilisation efficace pour chaque arme </p>
 									<select name="weapon" id="wp" onchange="image_wp()">
 										<option value="Toutes" selected="selected">Toutes les armes</option>
-									    <option value="AK47">AK47</option>
 									</select>
 									<center>
 										<img height=250 width=700 src="images/test.png" />
 									</center>
 								</div>
 							</div>
+							<script>
+								var values = ['AK47', 'AUG', 'AWP', 'Bizon', 'Bomb', 'CZ', 'Deagle', 'Decoy', 'DualBarettas', 'Famas', 'FiveSeven', 'Flash', 'G3SG1', 'Gallil', 'Glock', 'HE', 'Incendiary', 'Knife', 'M249', 'M4A1', 'M4A4', 'MP7', 'MP9', 'Mac10', 'Molotov', 'Negev', 'Nova', 'P2000', 'P250', 'P90', 'SG556', 'SawedOff', 'Scar20', 'Scout', 'Smoke', 'Swag7', 'Tec9', 'UMP', 'USP', 'Unknown', 'XM1014', 'Zeus']
+								var select = document.getElementById("wp");
+								  for (var i=0;i<values.length;i++)
+									{
+										var option = document.createElement("option");
+										option.value = values[i];
+										option.text = values[i];
+										select.appendChild(option);
+									}
+							</script>
 							<script>
 								function image_wp() {
 								var wp = document.getElementById("wp").value;
@@ -255,8 +268,18 @@
 								Les zones de tirs touchés montrent les endroits intéressants dans lesquels jouer tandis que les zones de tirs subis montrent les endroit à éviter. </p>
 							<select name="weapon2" id="wp2" onchange="change_wp()">
 								<option value="Toutes" selected="selected">Toutes les armes</option>
-								<option value="AK47">AK47</option>
 							</select>
+							<script>
+								var values = ['AK47', 'AUG', 'AWP', 'Bizon', 'Bomb', 'CZ', 'Deagle', 'Decoy', 'DualBarettas', 'Famas', 'FiveSeven', 'Flash', 'G3SG1', 'Gallil', 'Glock', 'HE', 'Incendiary', 'Knife', 'M249', 'M4A1', 'M4A4', 'MP7', 'MP9', 'Mac10', 'Molotov', 'Negev', 'Nova', 'P2000', 'P250', 'P90', 'SG556', 'SawedOff', 'Scar20', 'Scout', 'Smoke', 'Swag7', 'Tec9', 'UMP', 'USP', 'Unknown', 'XM1014', 'Zeus']
+								var select = document.getElementById("wp2");
+								  for (var i=0;i<values.length;i++)
+									{
+										var option = document.createElement("option");
+										option.value = values[i];
+										option.text = values[i];
+										select.appendChild(option);
+									}
+							</script>
 
 							<script>
 								function change_wp() {
@@ -358,9 +381,6 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
-
-			<script src="https://d3js.org/d3.v7.min.js"></script>
-			<script src="scripts/script.js"></script>
 
 
 	</body>

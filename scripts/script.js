@@ -6,8 +6,31 @@ data = data[0];
 
 console.log(data);
 
+getFrequency = (array) => {
+  const map = {};
+  array.forEach(item => {
+    if (item['wp'] != "Unknown") {
+     if(map[item['wp']]){
+        map[item['wp']]['freq']=map[item['wp']]['freq']+1;
+       map[item['wp']]['dmg']=map[item['wp']]['dmg']+parseInt(item['hp_dmg'])
+       map[item['wp']]['vic']=map[item['wp']]['vic']+(+(item['att_side']==item['winner_side']))
+       map[item['wp']]['hs']=map[item['wp']]['hs']+(+(item['hitbox']=='Head'))
+     }else{
+        map[item['wp']] = {freq:1, vic: +(item['att_side']==item['winner_side']), dmg:parseInt(item['hp_dmg']), 
+                           hs:+(item['hitbox']=='Head')};
+     }
+    }
+  });
+ const freq = []
+ for (const i in map){
+   freq.push({wp:i, frequency:map[i]['freq'], dmg:map[i]['dmg'], win:map[i]['vic'], hs:map[i]['hs']});
+ }
+  return freq;
+};
 
 weapons = getFrequency(data.filter(filtre_side));
+
+
 
 
 function create_select(values,select_name,select_id,label_text,container) {
@@ -23,10 +46,7 @@ function create_select(values,select_name,select_id,label_text,container) {
     select.appendChild(option);
 }
 
-  var label = document.createElement("label");
-  label.innerHTML = label_text;
-
-  document.getElementById(container).appendChild(label).appendChild(select)
+  document.getElementById(container).appendChild(select)
 }
 
 contours = (data, attr) => {
@@ -105,27 +125,7 @@ contours = (data, attr) => {
 
  weapons_mod = weapons.map(d => { var obj = {}; obj.wp = d.wp; obj.frequency = d.frequency; obj.total_dmg = d.dmg; obj.avg_dmg =  Math.round(10*d.dmg/d.frequency)/10; return obj;})
 
- getFrequency = (array) => {
-    const map = {};
-    array.forEach(item => {
-      if (item['wp'] != "Unknown") {
-       if(map[item['wp']]){
-          map[item['wp']]['freq']=map[item['wp']]['freq']+1;
-         map[item['wp']]['dmg']=map[item['wp']]['dmg']+parseInt(item['hp_dmg'])
-         map[item['wp']]['vic']=map[item['wp']]['vic']+(+(item['att_side']==item['winner_side']))
-         map[item['wp']]['hs']=map[item['wp']]['hs']+(+(item['hitbox']=='Head'))
-       }else{
-          map[item['wp']] = {freq:1, vic: +(item['att_side']==item['winner_side']), dmg:parseInt(item['hp_dmg']), 
-                             hs:+(item['hitbox']=='Head')};
-       }
-      }
-    });
-   const freq = []
-   for (const i in map){
-     freq.push({wp:i, frequency:map[i]['freq'], dmg:map[i]['dmg'], win:map[i]['vic'], hs:map[i]['hs']});
-   }
-    return freq;
- };
+
 
  wp_list = weapon_list(data)
 
