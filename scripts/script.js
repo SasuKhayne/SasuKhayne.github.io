@@ -475,15 +475,8 @@ async function main() {
   eco_data_rollup = d3.rollups(eco_data, grp => d3.sum(grp, d => d.winner_code)/(grp.length)-0.5 , d=> d.bin)
   .sort((a,b) => d3.ascending(a[0], b[0]));
 
-
-
-              
-  
-
 dmg_dist = dmg_distance(data, wp);
-BarChartEco("chart_eco", eco_data_rollup);
-console.log(eco_data_rollup);
-console.log("ok");
+BarChartEco("#chart_eco", eco_data_rollup);
 }
 
 main();
