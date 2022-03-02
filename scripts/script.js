@@ -1,6 +1,31 @@
-var data = d3.csv("/data/ligth2.csv");
+var csv = d3.csv("/data/ligth2.csv");
+
+var data = []
+csv.then((a)=>data.push(a))
 
 console.log(data);
+
+
+
+
+function create_select(values,select_name,select_id,label_text,container) {
+  var select = document.createElement("select");
+  select.name = select_name
+  select.id = select_id
+
+  for (const val of values)
+{
+    var option = document.createElement("option");
+    option.value = val;
+    option.text = val;
+    select.appendChild(option);
+}
+
+  var label = document.createElement("label");
+  label.innerHTML = label_text;
+
+  document.getElementById(container).appendChild(label).appendChild(select)
+}
 
 contours = (data, attr) => {
     var data_filtered = [];
