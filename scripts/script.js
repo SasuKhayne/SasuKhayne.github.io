@@ -481,7 +481,8 @@ async function main() {
   
 
 dmg_dist = dmg_distance(data, wp);
-return eco_data_rollup;
+BarChartEco("chart_eco", eco_data_rollup);
+console.log(eco_data_rollup);
 }
 
 var eco_data_rollup = main();
