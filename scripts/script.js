@@ -2,10 +2,12 @@ var csv = d3.csv("/data/ligth2.csv");
 
 var data = []
 csv.then((a)=>data.push(a))
+data = data[0];
 
 console.log(data);
 
 
+weapons = getFrequency(data.filter(filtre_side));
 
 
 function create_select(values,select_name,select_id,label_text,container) {
@@ -102,8 +104,6 @@ contours = (data, attr) => {
  nbRounds = getNbRounds(data)
 
  weapons_mod = weapons.map(d => { var obj = {}; obj.wp = d.wp; obj.frequency = d.frequency; obj.total_dmg = d.dmg; obj.avg_dmg =  Math.round(10*d.dmg/d.frequency)/10; return obj;})
-
- weapons = getFrequency(data.filter(filtre_side));
 
  getFrequency = (array) => {
     const map = {};
