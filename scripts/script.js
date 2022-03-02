@@ -348,12 +348,12 @@ function BarChart(container, data, {
   return svg.node();
 }
 
-linechart = (dataset) => {
+linechart = (container, dataset) => {
   const margin = ({top: 20, right: 30, bottom: 40, left: 50})
   const height = 400
   
   
-    const svg = d3.create("svg")
+    const svg = d3.select(container).append("svg")
       .attr("width", width)
       .attr("height", height)
   
@@ -527,6 +527,16 @@ linechart = (dataset) => {
 
 async function main() {
 
+  map = "de_cache";
+
+  rank = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16];
+
+  side = "Terrorist";
+
+  attr = "att";
+
+  wp = "Toutes";
+
   var csv = d3.csv("/data/ligth2.csv");
 
   var data = [];
@@ -569,9 +579,10 @@ async function main() {
 
 dmg_dist = dmg_distance(data, wp);
 
+
 BarChartEco("#chart_eco", eco_data_rollup);
 
-BarChart("#chart_dist",weapons, {
+BarChart("#chart_histo2", weapons, {
   x: d => d.wp,
   y: d => d.hs/d.frequency*100,
   xDomain: d3.groupSort(weapons, ([d]) => -d.hs/d.frequency, d => d.wp), // sort by descending frequency
@@ -580,6 +591,8 @@ BarChart("#chart_dist",weapons, {
   height: 500,
   color: couleur[side]
 });
+
+linechart("#chart_dist", dmg_dist);
 
 }
 
