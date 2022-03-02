@@ -81,6 +81,8 @@
 								function change_side() {
 								side = document.querySelector('input[name="side"]:checked').value;
 								main(map, rank, side, attr, wp);
+								document.getElementById("histo_select1").value = 1;
+								document.getElementById("histo_select2").value = 2;
 								}
 							</script>
 							<h1>Choix de la carte</h1>
@@ -105,6 +107,8 @@
 									function change_map() {
 									map = document.querySelector('input[name="map"]:checked').value;
 									main(map, rank, side, attr, wp);
+									document.getElementById("histo_select1").value = 1;
+									document.getElementById("histo_select2").value = 2;
 									}
 								</script>
 							<h1>Choix des rangs à observer</h1>
@@ -158,6 +162,8 @@
 								rank = checkboxesChecked;
 								console.log(rank);
 								main(map, rank, side, attr, wp);
+								document.getElementById("histo_select1").value = 1;
+								document.getElementById("histo_select2").value = 2;
 								}
 							</script>
 						</div>
@@ -176,7 +182,7 @@
 						<table>
 							<tr>
 								<td>
-									<select name="histo1" id="histo_select1" onchange="change_histo2()">
+									<select name="histo1" id="histo_select1" onchange="change_histo1()">
 									    <option value="1" selected="selected">Dégats moyens par tir</option>
 									    <option value="2">Fréquence d'utilisation (par tirs touchés)</option>
 									    <option value="3">Pourcentage de rounds gagnés</option>
