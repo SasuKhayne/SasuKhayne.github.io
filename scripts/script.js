@@ -428,6 +428,14 @@ function BarChartEco(data, {
           const g = svg.append("g");
         
         // Set the gradient
+        if(attr=="att"){
+          var os = other_side(side);
+          var s = side;
+          }
+          else {
+            var s = other_side(side);
+            var os = side;
+          }
           dataset.filter(filtre_side).filter(filtre_wp).forEach(item => {
             svg.append("linearGradient")
               .attr("id", "line-gradient"+item['id'])
@@ -438,8 +446,8 @@ function BarChartEco(data, {
               .attr("y2", item['att_pos_y']/2)
               .selectAll("stop")
               .data([
-                {offset: "0%", color: couleur[other_side(side)]},
-                {offset: "100%", color: couleur[side]}
+                {offset: "0%", color: couleur[os]},
+                {offset: "100%", color: couleur[s]}
               ])
               .enter().append("stop")
               .attr("offset", function(d) { return d.offset; })
