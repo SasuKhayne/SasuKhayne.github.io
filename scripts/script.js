@@ -1,9 +1,5 @@
 async function csv() {
-  return d3.csv("data/ligth2.csv", d => {
-  let res = {}
-  res.side = d.side;
-  return res
-})}
+  return d3.csv("data/ligth2.csv")}
 
 var data = csv();
 
