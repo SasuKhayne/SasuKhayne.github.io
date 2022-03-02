@@ -1,7 +1,7 @@
 var csv = d3.csv("/data/ligth2.csv");
 
-var data = []
-csv.then((a)=>data.push(a))
+var data = [];
+csv.then((a)=>data.push(a));
 data = data[0];
 
 console.log(data);
@@ -27,6 +27,13 @@ getFrequency = (array) => {
  }
   return freq;
 };
+
+function filtre_side(d) {
+  if (d[attr+'_side']==side){
+      return d
+  }
+}
+
 
 weapons = getFrequency(data.filter(filtre_side));
 
@@ -76,11 +83,6 @@ contours = (data, attr) => {
     return density;
  }
 
- function filtre_side(d) {
-    if (d[attr+'_side']==side){
-        return d
-    }
-  }
 
   function filtre_wp(d) {
     if(wp=='Toutes'){
