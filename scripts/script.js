@@ -132,10 +132,23 @@ dmg_distance = (array, wp) => {
   return freq;
 };
 
+weapon_list = (array) => {
+  const wp = ['Toutes'];
+  array.forEach(item => {
+      if(!wp.includes(item['wp'])){
+          wp.push(item['wp']);
+      }
+  });
+  return wp;
+};
+
+
+            
+
 // Copyright 2021 Observable, Inc.
 // Released under the ISC license.
 // https://observablehq.com/@d3/bar-chart
-function BarChartEco(data, {
+function BarChartEco(container, data, {
   x = d => d, // given d in data, returns the (ordinal) x-value
   y = d => d, // given d in data, returns the (quantitative) y-value
   title, // given d in data, returns the title text
@@ -185,7 +198,7 @@ function BarChartEco(data, {
     title = i => T(O[i], i, data);
   }
 
-  const svg = d3.create("svg")
+  const svg = d3.select(container).append(svg)
       .attr("width", width)
       .attr("height", height)
       .attr("viewBox", [0, 0, width, height])
@@ -453,31 +466,25 @@ async function main() {
   eco_data = data_red_cont.map( d => 
     { let winner = 0
       let eco_df = d['ct_eq_val'] - d['t_eq_val']
-      if (d['winner_side'] == "CounterTerrorist") {
-        winner = 1
-      } // else CounterTerrorist 0, default value 
+     if (d['winner_side'] == "CounterTerrorist") {
+       winner = 1
+     } // else CounterTerrorist 0, default value 
       return {eco_dif : eco_df, winner_code : winner, winner_side : d['winner_side'], 
               bin : Math.floor(eco_df/1000)*1000}})
 
-              eco_data_rollup = d3.rollups(eco_data, grp => d3.sum(grp, d => d.winner_code)/(grp.length)-0.5 , d=> d.bin)
-              .sort((a,b) => d3.ascending(a[0], b[0]))
+  eco_data_rollup = d3.rollups(eco_data, grp => d3.sum(grp, d => d.winner_code)/(grp.length)-0.5 , d=> d.bin)
+  .sort((a,b) => d3.ascending(a[0], b[0]));
+
+
 
               
-              weapon_list = (array) => {
-                const wp = ['Toutes'];
-                array.forEach(item => {
-                    if(!wp.includes(item['wp'])){
-                        wp.push(item['wp']);
-                    }
-                });
-                return wp;
-              };
+  
 
-  dmg_dist = dmg_distance(data, wp);
-
+dmg_dist = dmg_distance(data, wp);
+return eco_data_rollup;
 }
 
-main();
+var eco_data_rollup = main();
 
 
 
