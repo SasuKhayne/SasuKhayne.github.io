@@ -1,5 +1,5 @@
 async function csv() {
-  return d3.csv("/data/ligth2.csv", function(data) {
+  return d3.csv("/data/ligth.csv", function(data) {
     console.log(data);
 });
 }
