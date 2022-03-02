@@ -538,6 +538,7 @@ async function main() {
   weapons = getFrequency(data.filter(filtre_side));
 
   height = 512;
+  width = 640;
 
   couleur = ({Terrorist: "#D37F21", CounterTerrorist: "#2B53DE"});
 
