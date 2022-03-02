@@ -182,21 +182,100 @@
 									    <option value="3">Pourcentage de rounds gagnés</option>
 									    <option value="4">Pourcentage de Headshot</option>
 									</select>
+									<script>
+										function change_histo1() {
+										  var histo = document.getElementById("histo_select1").value;
+										  if(histo==1){BarChart("#chart_histo1", weapons_mod, {
+														x: d => d.wp,
+														y: d => d.avg_dmg,
+														xDomain: d3.groupSort(weapons_mod, ([d]) => -d.avg_dmg, d => d.wp), // sort by descending frequency
+														yLabel: "Dégâts moyen par tir touché",
+														width,
+														height: 500,
+														color: couleur[side]
+														})}
+										  if(histo==2){BarChart("#chart_histo1", weapons_mod, {
+														x: d => d.wp,
+														y: d => d.frequency/d3.sum(weapons_mod, d => d.frequency),
+														xDomain: d3.groupSort(weapons_mod, ([d]) => -d.frequency, d => d.wp), // sort by descending frequency
+														yLabel: "Fréquence d'utilisation (par tirs touchés)",
+														width,
+														height: 500,
+														color: couleur[side]
+														})}
+										  if(histo==4){BarChart("#chart_histo1", weapons, {
+														x: d => d.wp,
+														y: d => d.hs/d.frequency*100,
+														xDomain: d3.groupSort(weapons, ([d]) => -d.hs/d.frequency, d => d.wp), // sort by descending frequency
+														yLabel: "Pourcentage de headshot",
+														width,
+														height: 500,
+														color: couleur[side]
+														})}
+										  if(histo==3){BarChart("#chart_histo1", weapons, {
+														x: d => d.wp,
+														y: d => d.win/d.frequency,
+														xDomain: d3.groupSort(weapons, ([d]) => -d.win/d.frequency, d => d.wp), // sort by descending frequency
+														yLabel: "Pourcentage de victoire sur les rounds",
+														width,
+														height: 500,
+														color: couleur[side]
+														})}
+										}
+									</script>
 								<br></br>
 								<center>
 									<div id="chart_histo1"></div>		
-									<script>
-
-									</script>
 						      	</center>
 							</td>
 								<td>
-									<select name="histo2" id="histo-select2">
+									<select name="histo2" id="histo-select2" onchange="change_histo2()">
 									    <option value="1">Dégats moyens par tir</option>
 									    <option value="2" selected="selected">Fréquence d'utilisation (par tirs touchés)</option>
 									    <option value="3">Pourcentage de rounds gagnés</option>
 									    <option value="4">Pourcentage de Headshot</option>
 									</select>
+									<script>
+										function change_histo2() {
+										  var histo = document.getElementById("histo_select2").value;
+										  if(histo==1){BarChart("#chart_histo2", weapons_mod, {
+														x: d => d.wp,
+														y: d => d.avg_dmg,
+														xDomain: d3.groupSort(weapons_mod, ([d]) => -d.avg_dmg, d => d.wp), // sort by descending frequency
+														yLabel: "Dégâts moyen par tir touché",
+														width,
+														height: 500,
+														color: couleur[side]
+														})}
+										  if(histo==2){BarChart("#chart_histo2", weapons_mod, {
+														x: d => d.wp,
+														y: d => d.frequency/d3.sum(weapons_mod, d => d.frequency),
+														xDomain: d3.groupSort(weapons_mod, ([d]) => -d.frequency, d => d.wp), // sort by descending frequency
+														yLabel: "Fréquence d'utilisation (par tirs touchés)",
+														width,
+														height: 500,
+														color: couleur[side]
+														})}
+										  if(histo==4){BarChart("#chart_histo2", weapons, {
+														x: d => d.wp,
+														y: d => d.hs/d.frequency*100,
+														xDomain: d3.groupSort(weapons, ([d]) => -d.hs/d.frequency, d => d.wp), // sort by descending frequency
+														yLabel: "Pourcentage de headshot",
+														width,
+														height: 500,
+														color: couleur[side]
+														})}
+										  if(histo==3){BarChart("#chart_histo2", weapons, {
+														x: d => d.wp,
+														y: d => d.win/d.frequency,
+														xDomain: d3.groupSort(weapons, ([d]) => -d.win/d.frequency, d => d.wp), // sort by descending frequency
+														yLabel: "Pourcentage de victoire sur les rounds",
+														width,
+														height: 500,
+														color: couleur[side]
+														})}
+										}
+									</script>
 									<br></br>
 									<center>
 										<div id="chart_histo2"></div>	
@@ -235,7 +314,6 @@
 								  img.src = "images/wp/"+document.getElementById("wp").value+".png";
 								  wp = document.getElementById("wp").value;
 								  document.getElementById("wp2").value = wp;
-								  document.getElementById("chart_dist").innerHTML = '';
 								  linechart("#chart_dist", dmg_distance(data, wp));
 								}
 							</script>
