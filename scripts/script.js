@@ -197,7 +197,7 @@ function BarChartEco(container, data, {
     const T = title;
     title = i => T(O[i], i, data);
   }
-
+  document.getElementById(container.substr(1)).innerHTML = '';
   const svg = d3.select(container).append("svg")
       .attr("width", width)
       .attr("height", height)
@@ -308,6 +308,7 @@ function BarChart(container, data, {
     title = i => T(O[i], i, data);
   }
 
+  document.getElementById(container.substr(1)).innerHTML = '';
   const svg = d3.select(container).append("svg")
       .attr("width", width)
       .attr("height", height)
@@ -352,7 +353,7 @@ linechart = (container, dataset) => {
   const margin = ({top: 20, right: 30, bottom: 40, left: 50})
   const height = 400
   
-  
+    document.getElementById(container.substr(1)).innerHTML = '';
     const svg = d3.select(container).append("svg")
       .attr("width", width)
       .attr("height", height)
@@ -413,6 +414,7 @@ linechart = (container, dataset) => {
   }
 
   densityplot = (container, dataset, side, attr) => {
+    document.getElementById(container.substr(1)).innerHTML = '';
     const svg = d3.select(container).select(DOM.svg(width, height));
       
       var node = svg.selectAll("g.node")
@@ -525,7 +527,13 @@ linechart = (container, dataset) => {
     }
 
 
-async function main(map, rank, side, attr, wp) {
+async function main(map_var, rank_var, side_var, attr_var, wp_var) {
+
+  map = map_var;
+  rank = rank_var;
+  side = side_var;
+  attr = attr_var;
+  wp = wp_var;
 
   var csv = d3.csv("/data/ligth2.csv");
 
@@ -605,7 +613,7 @@ side = "Terrorist";
 attr = "att";
 wp = "Toutes";
 
-main(map = "de_cache", rank = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16], side = "Terrorist", attr = "att", wp = "Toutes");
+main(map_var = map, rank_var = rank, side_var = side, attr_var = attr, wp_var = wp);
 
 
 
