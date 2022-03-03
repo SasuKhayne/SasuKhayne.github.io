@@ -113,21 +113,23 @@ data_reduce = (array) => {
 
 dmg_distance = (array, wp) => {
   const map = {};
+  var total = 0;
   array.forEach(item => {
     if((wp==item['wp'] || wp=='Toutes') && item['att_side']==side){
       const distance_x = Math.pow(item['att_pos_x']-item['vic_pos_x'], 2);
       const distance_y = Math.pow(item['att_pos_y']-item['vic_pos_y'], 2);
-      const distance_tot = Math.pow(distance_x+distance_y, 0.5)*460/1024;
+      const distance_tot = Math.pow(distance_x+distance_y, 0.5)*230/1024;
      const distance = 5*parseInt(distance_tot/5)
      if(map[distance]){
         map[distance]=map[distance]+parseInt(item['hp_dmg']);
      }else{
-        map[distance] = parseInt(item['hp_dmg']);
+       map[distance] = parseInt(item['hp_dmg']);
      }
+     total=total+parseInt(item['hp_dmg']);
   }});
  const freq = []
  for (const i in map){
-   freq.push({distance:i, dmg:map[i]});
+   freq.push({distance:i, dmg:map[i]/total});
  }
   return freq;
 };
@@ -359,7 +361,7 @@ linechart = (container, dataset) => {
       .attr("height", height)
   
     const x = d3.scaleBand()
-      .domain(d3.range(5, 450, 5))
+      .domain(d3.range(5, 300, 5))
       .range([margin.left, width - margin.right])
     
     const y = d3.scaleLinear()
@@ -382,6 +384,7 @@ linechart = (container, dataset) => {
       .attr("text-anchor", "end")
       .attr("x", width)
       .attr("y", height-1)
+      .attr("style","color:white;")
       .text("Distance (en mètres)");
   
     svg.append("text")
@@ -391,7 +394,8 @@ linechart = (container, dataset) => {
       .attr("x", 0)
       .attr("dy", ".75em")
       .attr("transform", "rotate(-90)")
-      .text("Dommage cummulés");
+      .attr("style","color:white;")
+      .text("Fréquence");
   
   let xAxis = g => g
       .attr("transform", `translate(0,${height - margin.bottom})`)
