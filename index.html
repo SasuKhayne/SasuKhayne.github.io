@@ -324,6 +324,7 @@
 								  wp = document.getElementById("wp").value;
 								  document.getElementById("wp2").value = wp;
 								  linechart("#chart_dist", dmg_distance(data, wp));
+								  att_vic();
 								}
 							</script>
 							
@@ -369,6 +370,7 @@
 								var img = document.getElementById("wp_image");
 								img.src = "images/wp/"+document.getElementById("wp2").value+".png";
 								document.getElementById("wp").value = wp;
+								att_vic();
 								}
 							</script>
 							

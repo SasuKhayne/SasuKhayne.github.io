@@ -473,7 +473,7 @@ shotplot = (container, dataset, side, attr) => {
     .attr("width", 1)
     .attr("height", 1)
     .append("svg:image")
-    .attr("xlink:href", "https://zupimages.net/up/22/03/ysnn.png")
+    .attr("xlink:href", "images/maps/"+map+".png")
     .attr("width", 512)
     .attr("height", 512);
   
