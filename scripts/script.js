@@ -358,7 +358,9 @@ function BarChart(container, data, {
 
   svg.append("g")
       .attr("transform", `translate(0,${height - marginBottom})`)
-      .call(xAxis);
+      .call(xAxis)
+      .selectAll("text")
+      .attr("transform", "rotate(-90) translate(30,-12)");
 
   return svg.node();
 }
