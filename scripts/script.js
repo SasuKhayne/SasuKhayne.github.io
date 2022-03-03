@@ -556,7 +556,7 @@ async function main(map_var, rank_var, side_var, attr_var, wp_var) {
   attr = attr_var;
   wp = wp_var;
 
-  var csv = d3.csv("/data/ligth2.csv");
+  var csv = d3.csv("/data/data3.csv");
 
   data = [];
 
