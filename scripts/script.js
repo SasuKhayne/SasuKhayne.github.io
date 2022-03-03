@@ -158,6 +158,94 @@ weapon_list = (array) => {
 };
 
 
+// Copyright 2021 Observable, Inc.
+// Released under the ISC license.
+// https://observablehq.com/@d3/pie_chart
+function PieChart(container, data, {
+  name = ([x]) => x,  // given d in data, returns the (ordinal) label
+  value = ([, y]) => y, // given d in data, returns the (quantitative) value
+  title, // given d in data, returns the title text
+  width = 640, // outer width, in pixels
+  height = 400, // outer height, in pixe
+  innerRadius = 0, // inner radius of pie, in pixels (non-zero for donut)
+  outerRadius = Math.min(width, height) / 2, // outer radius of pie, in pixels
+  labelRadius = (innerRadius * 0.2 + outerRadius * 0.8), // center radius of labels
+  format = ",", // a format specifier for values (in the label)
+  stroke = innerRadius > 0 ? "none" : "white", // stroke separating widths
+  strokeWidth = 1, // width of stroke separating wedges
+  strokeLinejoin = "round", // line join of stroke separating wedges
+  padAngle = stroke === "none" ? 1 / outerRadius : 0, // angular separation between wedges
+} = {}) {
+  // Compute values.
+  const N = d3.map(data, name);
+  const V = d3.map(data, value);
+  const I = d3.range(N.length).filter(i => !isNaN(V[i]));
+
+  // Chose a default color scheme based on cardinality.
+  const colors = {'A' : '#ff0000','B':'#00ff00','Pas Plantée': '#0000ff'}
+
+  // Compute titles.
+  if (title === undefined) {
+    const formatValue = d3.format(format);
+    title = i => `${N[i]}\n${formatValue(V[i])}`;
+  } else {
+    const O = d3.map(data, d => d);
+    const T = title;
+    title = i => T(O[i], i, data);
+  }
+
+  // Construct arcs.
+  const arcs = d3.pie().padAngle(padAngle).sort(null).value(i => V[i])(I);
+  const arc = d3.arc().innerRadius(innerRadius).outerRadius(outerRadius);
+  const arcLabel = d3.arc().innerRadius(labelRadius).outerRadius(labelRadius);
+  
+  document.getElementById(container.substr(1)).innerHTML = '';
+  const svg = d3.select(container).append("svg")
+      .attr("width", width)
+      .attr("height", height)
+      .attr("viewBox", [-width / 2, -height / 2, width, height])
+      .attr("style", "max-width: 100%; height: auto; height: intrinsic;");
+
+  svg.append("g")
+      .attr("stroke", stroke)
+      .attr("stroke-width", strokeWidth)
+      .attr("stroke-linejoin", strokeLinejoin)
+    .selectAll("path")
+    .data(arcs)
+    .join("path")
+      .attr("fill", d => colors[N[d.index]])
+      .attr("opacity", 0.6)
+      .attr("d", arc)
+    .append("title")
+      .text(d => title(d.data));
+
+  svg.append("g")
+      .attr("font-family", "sans-serif")
+      .attr("font-size", 10)
+      .attr("text-anchor", "middle")
+    .selectAll("text")
+    .data(arcs)
+    .join("text")
+      .attr("transform", d => `translate(${arcLabel.centroid(d)})`)
+    .selectAll("tspan")
+    .data(d => {
+      const lines = `${title(d.data)}`.split(/\n/);
+      return (d.endAngle - d.startAngle) > 0.25 ? lines : lines.slice(0, 1);
+    })
+    .join("tspan")
+      .attr("x", 0)
+      .attr("y", (_, i) => `${i * 1.1}em`)
+      .attr("font-weight", "bold")
+      .style("font-size" , "20px")
+      .text( (d) => { if (d[0] == 0 || d[0] == 1) {
+                      return 100*d +'%'}
+                     else {
+                      return d
+                     }
+        
+      });
+  return Object.assign(svg.node());
+}
             
 
 // Copyright 2021 Observable, Inc.
@@ -192,7 +280,6 @@ function BarChartEco(container, data, {
   if (yDomain === undefined) yDomain = [d3.min(Y), d3.max(Y)];
 
   const bandwidth = (height - marginLeft - marginRight)/(d3.max(xDomain) - d3.min(xDomain) +1 )*1000
-  console.log(bandwidth) 
 
   // Omit any data not present in the x-domain.
   data = data.filter(d => d[0] >= xDomain[0] && d[0] <= xDomain[1]);
@@ -661,6 +748,20 @@ BarChart("#chart_histo2", weapons_mod, {
 linechart("#chart_dist", dmg_dist);
 
 map_vierge("#chart_map");
+
+PieChart("#plant_site", bomb_data_map.filter(filtre_round_type)[0].data, {
+  name: d => d.place,
+  value: d => d.val,
+  width,
+  height: 500
+})
+
+PieChart("#site_win_rate", bomb_data_map.filter(filtre_round_type)[0].data, {
+  name: d => d.place,
+  value: d => d.win_rate,
+  width,
+  height: 500
+}))
 
 BarChart("#chart_histo1", weapons_mod, {
   x: d => d.wp,
