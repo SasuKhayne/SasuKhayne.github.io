@@ -532,6 +532,8 @@ map_vierge = (container) => {
   div.innerHTML = '';
   var option = document.createElement("img");
   option.src = "images/maps/"+map+".png";
+  option.width = 512;
+  option.height = 512;
   div.appendChild(option);
   }
 
