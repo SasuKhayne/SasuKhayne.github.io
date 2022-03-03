@@ -529,9 +529,11 @@ linechart = (container, dataset) => {
     map_vierge = (container) => {
       const svg = d3.select(container).append("svg").attr("width", 512).attr("height", 512);
           
-        var nodeEnter = node.enter()
-          .append("svg:g")
-          .attr("class", "node")
+      var node = svg.selectAll("g.node")
+
+      var nodeEnter = node.enter()
+        .append("svg:g")
+        .attr("class", "node")
         
       var defs = nodeEnter.append("defs");
       defs.append('pattern')

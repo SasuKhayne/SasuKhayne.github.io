@@ -83,6 +83,7 @@
 								main(map, rank, side, attr, wp);
 								document.getElementById("histo_select1").value = 1;
 								document.getElementById("histo_select2").value = 2;
+								document.getElementById("type_map").value = 0;
 								}
 							</script>
 							<h1>Choix de la carte</h1>
@@ -109,6 +110,7 @@
 									main(map, rank, side, attr, wp);
 									document.getElementById("histo_select1").value = 1;
 									document.getElementById("histo_select2").value = 2;
+									document.getElementById("type_map").value = 0;
 									}
 								</script>
 							<h1>Choix des rangs à observer</h1>
@@ -164,6 +166,7 @@
 								main(map, rank, side, attr, wp);
 								document.getElementById("histo_select1").value = 1;
 								document.getElementById("histo_select2").value = 2;
+								document.getElementById("type_map").value = 0;
 								}
 							</script>
 						</div>
@@ -392,6 +395,7 @@
 								}
 								if(type_visu==3 || type_visu==4){densityplot("#chart_map", data, side, attr);}
 								if(type_visu==1 || type_visu==2){shotplot("#chart_map", data, side, attr);}
+								if(type_visu==0){map_vierge("#chart_map");}
 							</script>
 							
 						</div>
