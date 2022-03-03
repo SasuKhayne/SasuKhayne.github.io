@@ -330,12 +330,20 @@ function BarChartEco(container, data, {
             if (d[1] < 0) {
               y_pos = (height - marginBottom + marginTop)/2
             }
+            console.log("y")
+            console.log(y_pos)
+            console.log(yScale(d[1]))
+            console.log(d[1])
             return y_pos})
       .attr("height", (d) => {
             let hg = (height - marginBottom + marginTop)/2 - yScale(d[1]) 
             if (d[1] <0) {
               hg = yScale(d[1]) - (height - marginBottom + marginTop)/2
             }
+            console.log("height")
+            console.log(hg)
+            console.log(yScale(d[1]))
+            console.log(d[1])
             return hg 
             }
         )
