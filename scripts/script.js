@@ -26,6 +26,12 @@ function filtre_side(d) {
   }
 }
 
+function filtre_map(d) {
+  if (d['map']==map){
+      return d
+  }
+}
+
 function filtre_wp(d) {
   if(wp=='Toutes'){
     return d
@@ -379,28 +385,28 @@ linechart = (container, dataset) => {
       .attr("fill", couleur[side])
       .attr("stroke", "#000000")
   
-    svg.append("text")
+    svg.append("p")
       .attr("class", "y label")
       .attr("text-anchor", "end")
       .attr("x", width)
       .attr("y", height-1)
-      .attr("style","color:white;")
+      //.attr("style","color:white;")
       .text("Distance (en mètres)");
   
-    svg.append("text")
+    svg.append("p")
       .attr("class", "y label")
       .attr("text-anchor", "end")
       .attr("y", 5)
       .attr("x", 0)
       .attr("dy", ".75em")
       .attr("transform", "rotate(-90)")
-      .attr("style","color:white;")
+      //.attr("style","color:white;")
       .text("Fréquence");
   
   let xAxis = g => g
       .attr("transform", `translate(0,${height - margin.bottom})`)
       .call(d3.axisBottom( d3.scaleBand()
-      .domain(d3.range(5, 450, 20))
+      .domain(d3.range(5, 300, 20))
       .range([margin.left, width - margin.right])))
   
   let yAxis = g => g
