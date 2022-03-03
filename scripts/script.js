@@ -563,7 +563,7 @@ async function main(map_var, rank_var, side_var, attr_var, wp_var) {
   csv = await csv.then((a)=>data.push(a));
   data = data[0];
 
-  data.filter(filtre_map);
+  data = data.filter(filtre_map);
 
   weapons = getFrequency(data.filter(filtre_side));
 
