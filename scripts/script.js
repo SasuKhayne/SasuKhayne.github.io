@@ -385,22 +385,22 @@ linechart = (container, dataset) => {
       .attr("fill", couleur[side])
       .attr("stroke", "#000000")
   
-    svg.append("p")
+    svg.append("text")
       .attr("class", "y label")
       .attr("text-anchor", "end")
       .attr("x", width)
       .attr("y", height-1)
-      //.attr("style","color:white;")
+      .attr("style","fill:white;")
       .text("Distance (en mètres)");
   
-    svg.append("p")
+    svg.append("text")
       .attr("class", "y label")
       .attr("text-anchor", "end")
       .attr("y", 5)
       .attr("x", 0)
       .attr("dy", ".75em")
       .attr("transform", "rotate(-90)")
-      //.attr("style","color:white;")
+      .attr("style","fill:white;")
       .text("Fréquence");
   
   let xAxis = g => g
@@ -563,7 +563,7 @@ async function main(map_var, rank_var, side_var, attr_var, wp_var) {
   csv = await csv.then((a)=>data.push(a));
   data = data[0];
 
-  console.log(data);
+  data.filter(filtre_map);
 
   weapons = getFrequency(data.filter(filtre_side));
 
