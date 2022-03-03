@@ -562,8 +562,17 @@ async function main(map_var, rank_var, side_var, attr_var, wp_var) {
 
   csv = await csv.then((a)=>data.push(a));
   data = data[0];
+  
+  var csv_map = d3.csv("/data/data4.csv");
+
+  data_map = [];
+
+  csv_map = await csv_map.then((a)=>data_map.push(a));
+  data_map = data_map[0];
 
   data = data.filter(filtre_map);
+  
+  data_map = data_map.filter(filtre_map);
 
   weapons = getFrequency(data.filter(filtre_side));
 
