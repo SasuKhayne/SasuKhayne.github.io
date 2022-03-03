@@ -526,35 +526,75 @@ linechart = (container, dataset) => {
       return svg.node();
     }
 
-    map_vierge = (container) => {
-      const svg = d3.select(container).append("svg").attr("width", 512).attr("height", 512);
-          
-      var node = svg.selectAll("g.node")
-
-      var nodeEnter = node.enter()
-        .append("svg:g")
-        .attr("class", "node")
-        
-      var defs = nodeEnter.append("defs");
-      defs.append('pattern')
-        .attr("id", "map"  )
-        .attr("width", 1)
-        .attr("height", 1)
-        .append("svg:image")
-        .attr("xlink:href", "https://zupimages.net/up/22/03/ysnn.png")
+map_vierge = (container) => {
+  const svg = d3.select(container).append("svg").attr("width", 512).attr("height", 512);
+    
+    var node = svg.selectAll("g.node")
+      .data([])
+      
+    var nodeEnter = node.enter()
+      .append("svg:g")
+      .attr("class", "node")
+    
+  var defs = nodeEnter.append("defs");
+  defs.append('pattern')
+    .attr("id", "map"  )
+    .attr("width", 1)
+    .attr("height", 1)
+    .append("svg:image")
+    .attr("xlink:href", "https://zupimages.net/up/22/03/ysnn.png")
+    .attr("width", 512)
+    .attr("height", 512);
+  
+    nodeEnter.append("svg:rect")
+        .attr("x", d => 0)
+        .attr("y", d => 0)  
+        .attr("fill","url(#map)")
         .attr("width", 512)
         .attr("height", 512);
-      
-        nodeEnter.append("svg:rect")
-            .attr("x", d => 0)
-            .attr("y", d => 0)  
-            .attr("fill","url(#map)")
-            .attr("width", 512)
-            .attr("height", 512);
-      
-        const g = svg.append("g"); 
-        return svg.node();  
-        };
+  
+    const g = svg.append("g");
+  
+  // Set the gradient
+  if(attr=="att"){
+    var os = other_side(side);
+    var s = side;
+    }
+    else {
+      var s = other_side(side);
+      var os = side;
+    }
+    dataset.filter(filtre_side).filter(filtre_wp).forEach(item => {
+      svg.append("linearGradient")
+        .attr("id", "line-gradient"+item['id'])
+        .attr("gradientUnits", "userSpaceOnUse")
+        .attr("x1", item['vic_pos_x']/2)
+        .attr("y1", item['vic_pos_y']/2)
+        .attr("x2", item['att_pos_x']/2)
+        .attr("y2", item['att_pos_y']/2)
+        .selectAll("stop")
+        .data([
+          {offset: "0%", color: couleur[os]},
+          {offset: "100%", color: couleur[s]}
+        ])
+        .enter().append("stop")
+        .attr("offset", function(d) { return d.offset; })
+        .attr("stop-color", function(d) { return d.color; });
+    });
+  
+    g.selectAll('line')
+      .data(dataset.filter(filtre_side).filter(filtre_wp))
+      .enter()
+      .append('line')
+      .attr("stroke", d=> "url(#line-gradient"+d['id']+")" )
+      .style("stroke-width", 1)
+      .attr("x1", d => d['vic_pos_x']/2)
+      .attr("y1", d => d['vic_pos_y']/2)
+      .attr("x2", d => d['att_pos_x']/2)
+      .attr("y2", d => d['att_pos_y']/2); 
+    
+    return svg.node();
+  }
 
 
 async function main(map_var, rank_var, side_var, attr_var, wp_var) {
