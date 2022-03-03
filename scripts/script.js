@@ -20,6 +20,11 @@ getFrequency = (array) => {
   return freq;
   };
 
+function filtre_round_type(d)  {
+  if (d.round_type == round_type) {
+    return d.data}
+}
+
 function filtre_side(d) {
   if (d[attr+'_side']==side){
       return d
@@ -653,13 +658,14 @@ map_vierge = (container) => {
   }
 
 
-async function main(map_var, rank_var, side_var, attr_var, wp_var) {
+async function main(map_var, rank_var, side_var, attr_var, wp_var, round_type_var) {
 
   map = map_var;
   rank = rank_var;
   side = side_var;
   attr = attr_var;
-  wp = wp_var;
+  wp = wp_var
+  round_type = round_type_var;
 
   var csv = d3.csv("/data/data3.csv");
 
@@ -791,4 +797,4 @@ side = "Terrorist";
 attr = "att";
 wp = "Toutes";
 
-main(map_var = map, rank_var = rank, side_var = side, attr_var = attr, wp_var = wp);
+main(map_var = map, rank_var = rank, side_var = side, attr_var = attr, wp_var = wp, round_type_var = round_type);
