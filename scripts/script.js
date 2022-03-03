@@ -26,6 +26,12 @@ function filtre_side(d) {
   }
 }
 
+function filtre_side_histo(d) {
+  if (d['att_side']==side){
+      return d
+  }
+}
+
 function filtre_map(d) {
   if (d['map']==map){
       return d
@@ -574,7 +580,7 @@ async function main(map_var, rank_var, side_var, attr_var, wp_var) {
   
   data_map = data_map.filter(filtre_map);
 
-  weapons = getFrequency(data.filter(filtre_side));
+  weapons = getFrequency(data.filter(filtre_side_histo));
 
   height = 512;
   width = 640;
