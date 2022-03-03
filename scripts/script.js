@@ -456,8 +456,8 @@ linechart = (container, dataset) => {
       return svg.node();
     }
 
-  shotplot = (dataset, side, attr) => {
-    const svg = d3.select(DOM.svg(width, height));
+  shotplot = (container, dataset, side, attr) => {
+    const svg = d3.select(container).append("svg").attr("width", 512).attr("height", 512);
       
       var node = svg.selectAll("g.node")
         .data(dataset)
@@ -526,6 +526,33 @@ linechart = (container, dataset) => {
       return svg.node();
     }
 
+    map_vierge = (container) => {
+      const svg = d3.select(container).append("svg").attr("width", 512).attr("height", 512);
+          
+        var nodeEnter = node.enter()
+          .append("svg:g")
+          .attr("class", "node")
+        
+      var defs = nodeEnter.append("defs");
+      defs.append('pattern')
+        .attr("id", "map"  )
+        .attr("width", 1)
+        .attr("height", 1)
+        .append("svg:image")
+        .attr("xlink:href", "https://zupimages.net/up/22/03/ysnn.png")
+        .attr("width", 512)
+        .attr("height", 512);
+      
+        nodeEnter.append("svg:rect")
+            .attr("x", d => 0)
+            .attr("y", d => 0)  
+            .attr("fill","url(#map)")
+            .attr("width", 512)
+            .attr("height", 512);
+      
+        const g = svg.append("g");   
+        };
+
 
 async function main(map_var, rank_var, side_var, attr_var, wp_var) {
 
@@ -593,6 +620,8 @@ BarChart("#chart_histo2", weapons_mod, {
 
 linechart("#chart_dist", dmg_dist);
 
+map_vierge("#chart_map");
+
 BarChart("#chart_histo1", weapons_mod, {
   x: d => d.wp,
   y: d => d.avg_dmg,
@@ -603,7 +632,7 @@ BarChart("#chart_histo1", weapons_mod, {
   color: couleur[side]
 })
 
-densityplot("#chart_map", data, side, attr);
+
 
 }
 
