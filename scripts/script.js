@@ -529,45 +529,10 @@ shotplot = (container, dataset, side, attr) => {
 
 map_vierge = (container) => {
   document.getElementById(container.substr(1)).innerHTML = '';
-  const svg = d3.select(container).append("svg").attr("width", 512).attr("height", 512);
-  const dataset = [];
-    var node = svg.selectAll("g.node")
-      .data(dataset)
-      
-    var nodeEnter = node.enter()
-      .append("svg:g")
-      .attr("class", "node")
-    
-  var defs = nodeEnter.append("defs");
-  defs.append('pattern')
-    .attr("id", "map"  )
-    .attr("width", 1)
-    .attr("height", 1)
-    .append("svg:image")
-    .attr("xlink:href", "images/maps/"+map+".png")
-    .attr("width", 512)
-    .attr("height", 512);
-  
-    nodeEnter.append("svg:rect")
-        .attr("x", d => 0)
-        .attr("y", d => 0)  
-        .attr("fill","url(#map)")
-        .attr("width", 512)
-        .attr("height", 512);
-  
-    svg.append("g")
-        .attr("fill", "none")
-        .attr("stroke", couleur[side])
-        .attr("stroke-linejoin", "round")
-      .selectAll("path")
-      .data(contours(data, attr))
-      .join("path")
-        .attr("stroke-width", d => d.value*4/d3.max(contours(data, attr), d => d.value))
-        .attr("fill", d => couleur[side]) //color(d.value)
-        .attr("fill-opacity", d => d.value/d3.max(contours(data, attr), d => d.value))
-        .attr("d", d3.geoPath());
-    
-    return svg.node();
+  var div = document.getElementById("wp");
+  var option = document.createElement("img");
+  option.src = "images/maps/"+map+".png";
+  select.appendChild(div);
   }
 
 
