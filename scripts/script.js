@@ -528,8 +528,8 @@ shotplot = (container, dataset, side, attr) => {
   }
 
 map_vierge = (container) => {
-  document.getElementById(container.substr(1)).innerHTML = '';
-  var div = document.getElementById("wp");
+  var div = document.getElementById(container.substr(1));
+  div.innerHTML = '';
   var option = document.createElement("img");
   option.src = "images/maps/"+map+".png";
   select.appendChild(div);
@@ -602,7 +602,7 @@ BarChart("#chart_histo2", weapons_mod, {
 
 linechart("#chart_dist", dmg_dist);
 
-densityplot("#chart_map", data, side, attr);
+map_vierge("#chart_map");
 
 BarChart("#chart_histo1", weapons_mod, {
   x: d => d.wp,
