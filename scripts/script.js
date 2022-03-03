@@ -796,5 +796,6 @@ rank = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16];
 side = "Terrorist";
 attr = "att";
 wp = "Toutes";
+round_type = "ECO"
 
 main(map_var = map, rank_var = rank, side_var = side, attr_var = attr, wp_var = wp, round_type_var = round_type);
