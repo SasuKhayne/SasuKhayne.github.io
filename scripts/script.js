@@ -552,7 +552,8 @@ linechart = (container, dataset) => {
             .attr("width", 512)
             .attr("height", 512);
       
-        const g = svg.append("g");   
+        const g = svg.append("g"); 
+        return svg.node();  
         };
 
 
