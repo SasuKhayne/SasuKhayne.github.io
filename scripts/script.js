@@ -102,8 +102,9 @@ getNbRounds = (array) => {
 
 data_reduce = (array) => {
   const data = []
+  array.sort(function ( a, b ) { return b['seconds'] - a['seconds'] });
   array.forEach(item => {
-  if (data[item['file']]){
+  if (data[item['file']] ){
     
     var bool = false
     
@@ -113,11 +114,11 @@ data_reduce = (array) => {
       }
     }
     if (bool == false) {
-      data[item['file']].push({round : +item['round'], ct_eq_val : +item['ct_eq_val'], t_eq_val : +item['t_eq_val'],      winner_side : item['winner_side'], side : item['att_side'], round_type : item['round_type']})
+      data[item['file']].push({round : +item['round'], ct_eq_val : +item['ct_eq_val'], t_eq_val : +item['t_eq_val'],      winner_side : item['winner_side'], side : item['att_side'], round_type : item['round_type'], bomb_site : item['bomb_site']})
     }
   }
-  else {
-    data[item['file']] = [{round : +item['round'], ct_eq_val : +item['ct_eq_val'], t_eq_val : +item['t_eq_val'], winner_side : item['winner_side'], side : item['att_side'], round_type : item['round_type']}]
+  else if (item['att_side'] != 'None') {
+    data[item['file']] = [{round : +item['round'], ct_eq_val : +item['ct_eq_val'], t_eq_val : +item['t_eq_val'], winner_side : item['winner_side'], side : item['att_side'], round_type : item['round_type'], bomb_site : item['bomb_site']}]
   }
 })
   return data
@@ -597,11 +598,38 @@ async function main(map_var, rank_var, side_var, attr_var, wp_var) {
 
   wp_list = weapon_list(data);
 
-
-
   data_red = data_reduce(data);
 
   data_red_cont = [].concat.apply([],  Object.values(data_red));
+
+  bomb_data = d3.rollups(data_red_cont, grp => d3.count(grp,  d => d.round), d => d.round_type, d => d.bomb_site, d=> d.winner_side)
+
+  bomb_data_map = bomb_data.map( (d) => {
+    let data_val = []
+    let sum = 0
+    d[1].forEach (item => {
+    sum += d3.sum(item[1], d => +d[1])
+    })
+    d[1].forEach (item => {
+      let sum_side = d3.sum(item[1], d => +d[1])
+      let obj = {}
+      if (item[0] == '') {
+      obj['place'] = "Pas Plantée"
+      }
+      else {
+      obj['place'] = item[0]
+      }
+      var terro_win = 0
+      item[1].forEach( sub_item => {
+        if (sub_item[0] == "Terrorist") {
+          terro_win = sub_item[1]
+        }
+      })
+      obj['val'] = (Math.round(sum_side/sum * 100) / 100).toFixed(2)
+      obj['win_rate'] = (Math.round(terro_win/sum_side* 100)/100).toFixed(2)
+      data_val.push(obj)
+    })
+    return {round_type : d[0], data : data_val}})
 
   eco_data = data_red_cont.map( d => 
     { let winner = 0
@@ -655,12 +683,3 @@ attr = "att";
 wp = "Toutes";
 
 main(map_var = map, rank_var = rank, side_var = side, attr_var = attr, wp_var = wp);
-
-
-
-
-
-  
-
-   
-
