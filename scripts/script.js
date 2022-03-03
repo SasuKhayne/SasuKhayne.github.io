@@ -351,7 +351,8 @@ function BarChart(container, data, {
       .attr("x", i => xScale(X[i]))
       .attr("y", i => yScale(Y[i]))
       .attr("height", i => yScale(0) - yScale(Y[i]))
-      .attr("width", xScale.bandwidth());
+      .attr("width", xScale.bandwidth())
+      .attr("stroke", "#000000");
 
   if (title) bar.append("title")
       .text(title);
