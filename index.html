@@ -421,6 +421,19 @@
 								var round_type = document.getElementById("eco").value;
 								function change_eco() {
 								var round_type = document.getElementById("eco").value;
+								PieChart("#plant_site", bomb_data_map.filter(filtre_round_type)[0].data, {
+									name: d => d.place,
+									value: d => d.val,
+									width,
+									height: 500
+								})
+
+							PieChart("#site_win_rate", bomb_data_map.filter(filtre_round_type)[0].data, {
+								name: d => d.place,
+								value: d => d.win_rate,
+								width,
+								height: 500
+							})
 								}
 							</script>
 							<table>

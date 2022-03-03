@@ -761,7 +761,7 @@ PieChart("#site_win_rate", bomb_data_map.filter(filtre_round_type)[0].data, {
   value: d => d.win_rate,
   width,
   height: 500
-}))
+})
 
 BarChart("#chart_histo1", weapons_mod, {
   x: d => d.wp,
