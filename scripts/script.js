@@ -756,7 +756,14 @@ async function main(map_var, rank_var, side_var, attr_var, wp_var, round_type_va
 dmg_dist = dmg_distance(data, wp);
 
 
-BarChartEco("#chart_eco", eco_data_rollup);
+BarChartEco("#chart_eco", eco_data_rollup, {
+  x : d => d[0],
+  y : d => d[1],
+  yLabel: "Différence pourcentage de victoire bonus en fonction de la différence d'économie",
+  width,
+  height: 500,
+  color: couleur[side]
+});
 
 BarChart("#chart_histo2", weapons_mod, {
   x: d => d.wp,
