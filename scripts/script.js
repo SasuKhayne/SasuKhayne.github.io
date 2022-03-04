@@ -300,6 +300,8 @@ function BarChartEco(container, data, {
   console.log(yDomain)
   console.log(yRange)
 
+  console.log(data)
+
     // Compute titles.
   if (title === undefined) {
     const formatValue = yScale.tickFormat(100, yFormat);
