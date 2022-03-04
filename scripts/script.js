@@ -295,6 +295,11 @@ function BarChartEco(container, data, {
   const xAxis = d3.axisBottom(xScale).tickSizeOuter(0);
   const yAxis = d3.axisLeft(yScale).ticks(height / 20, yFormat);
 
+  console.log("yScale")
+  console.log(yScale)
+  console.log(yDomain)
+  console.log(yRange)
+
     // Compute titles.
   if (title === undefined) {
     const formatValue = yScale.tickFormat(100, yFormat);
