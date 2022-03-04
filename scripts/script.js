@@ -243,7 +243,7 @@ function PieChart(container, data, {
       .attr("font-weight", "bold")
       .style("font-size" , "20px")
       .text( (d) => { if (d[0] == 0 || d[0] == 1) {
-                      return (100*d).toFixed(2) +'%'}
+                      return (100*d).toFixed(0) +'%'}
                      else {
                       return d
                      }
