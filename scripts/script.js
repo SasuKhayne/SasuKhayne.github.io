@@ -731,8 +731,8 @@ async function main(map_var, rank_var, side_var, attr_var, wp_var, round_type_va
           terro_win = sub_item[1]
         }
       })
-      obj['val'] = (Math.round(sum_side/sum * 100) / 100).toFixed(2)
-      obj['win_rate'] = (Math.round(terro_win/sum_side* 100)/100).toFixed(2)
+      obj['val'] = (Math.round(sum_side/sum * 100) / 100).toFixed(4)
+      obj['win_rate'] = (Math.round(terro_win/sum_side* 100)/100).toFixed(4)
       data_val.push(obj)
     })
     return {round_type : d[0], data : data_val}})
