@@ -301,6 +301,8 @@ function BarChartEco(container, data, {
   console.log(yRange)
 
   console.log(data)
+  console.log(Y)
+  console.log(X)
 
     // Compute titles.
   if (title === undefined) {
