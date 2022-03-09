@@ -21,7 +21,7 @@ getFrequency = (array) => {
   };
 
 function filtre_rank(d) {
-  if (rank.includes(d.avg_match_rank)) {
+  if (rank.includes(+d.avg_match_rank)) {
     return d
   }
 }
@@ -103,7 +103,6 @@ getNbRounds = (array) => {
         list[item['file']] = {nb_round : 0} ;
       }
     });
-  console.log(list)
   var nb_rounds = 0
   for (const elt in list){
     nb_rounds += list[elt]['nb_round'] ;
@@ -301,15 +300,6 @@ function BarChartEco(container, data, {
   const xAxis = d3.axisBottom(xScale).tickSizeOuter(0);
   const yAxis = d3.axisLeft(yScale).ticks(height / 20, yFormat);
 
-  console.log("yScale")
-  console.log(yScale)
-  console.log(yDomain)
-  console.log(yRange)
-
-  console.log(data)
-  console.log(Y)
-  console.log(X)
-
     // Compute titles.
   if (title === undefined) {
     const formatValue = yScale.tickFormat(100, yFormat);
@@ -350,20 +340,14 @@ function BarChartEco(container, data, {
             if (d[1] < 0) {
               y_pos = (height - marginBottom + marginTop)/2
             }
-            console.log("y")
-            console.log(y_pos)
-            console.log(yScale(d[1]))
-            console.log(d[1])
+           
             return y_pos})
       .attr("height", (d) => {
             let hg = (height - marginBottom + marginTop)/2 - yScale(d[1]) 
             if (d[1] <0) {
               hg = yScale(d[1]) - (height - marginBottom + marginTop)/2
             }
-            console.log("height")
-            console.log(hg)
-            console.log(yScale(d[1]))
-            console.log(d[1])
+          
             return hg 
             }
         )
