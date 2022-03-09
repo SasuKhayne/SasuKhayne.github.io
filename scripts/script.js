@@ -20,6 +20,12 @@ getFrequency = (array) => {
   return freq;
   };
 
+function filtre_rank(d) {
+  if (rank.includes(d.rank)) {
+    return d
+  }
+}
+
 function filtre_round_type(d)  {
   if (d.round_type == round_type) {
     return d.data}
@@ -669,12 +675,12 @@ map_vierge = (container) => {
 
 async function main(map_var, rank_var, side_var, attr_var, wp_var, round_type_var) {
 
-  map = map_var;
-  rank = rank_var;
-  side = side_var;
-  attr = attr_var;
-  wp = wp_var
-  round_type = round_type_var;
+  map = map_var; // str
+  rank = rank_var; // array of str
+  side = side_var; // str
+  attr = attr_var; // str
+  wp = wp_var // str
+  round_type = round_type_var; // str
 
   var csv = d3.csv("/data/data3.csv");
 
@@ -690,9 +696,13 @@ async function main(map_var, rank_var, side_var, attr_var, wp_var, round_type_va
   csv_map = await csv_map.then((a)=>data_map.push(a));
   data_map = data_map[0];
 
-  data = data.filter(filtre_map);
+  // FILTER DATA AND DATA MAP 
+
+  data = data.filter(filtre_map).filter(filtre_rank);
   
-  data_map = data_map.filter(filtre_map);
+  data_map = data_map.filter(filtre_map).filter(filtre_rank);
+
+  // END FILTER 
 
   weapons = getFrequency(data.filter(filtre_side_histo));
 
