@@ -21,6 +21,7 @@ getFrequency = (array) => {
   };
 
 function filtre_rank(d) {
+  console.log(d.avg_match_rank)
   if (rank.includes(str(d.avg_match_rank))) {
     return d
   }
@@ -801,7 +802,7 @@ BarChart("#chart_histo1", weapons_mod, {
 
 }
 
-map = "de_cache";
+map = "de_dust2";
 rank = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18];
 side = "Terrorist";
 attr = "att";
