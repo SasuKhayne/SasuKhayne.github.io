@@ -162,7 +162,8 @@
 										}
 									}
 								rank = checkboxesChecked;
-								console.log(rank);
+								console.log("rank")
+								console.log(rank)
 								main(map, rank, side, attr, wp, round_type);
 								document.getElementById("histo_select1").value = 1;
 								document.getElementById("histo_select2").value = 2;
@@ -422,19 +423,6 @@
 								function change_eco() {
 								var round_type = document.getElementById("eco").value;
 								main(map,rank,side,attr,wp,round_type)
-							// 	PieChart("#plant_site", bomb_data_map.filter(filtre_round_type)[0].data, {
-							// 		name: d => d.place,
-							// 		value: d => d.val,
-							// 		width,
-							// 		height: 500
-							// 	})
-
-							// PieChart("#site_win_rate", bomb_data_map.filter(filtre_round_type)[0].data, {
-							// 	name: d => d.place,
-							// 	value: d => d.win_rate,
-							// 	width,
-							// 	height: 500
-							// })
 								}
 							</script>
 							<table>
