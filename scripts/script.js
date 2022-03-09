@@ -21,7 +21,7 @@ getFrequency = (array) => {
   };
 
 function filtre_rank(d) {
-  if (rank.includes(d.rank)) {
+  if (rank.includes(d.avg_match_rank)) {
     return d
   }
 }
@@ -483,7 +483,7 @@ function BarChart(container, data, {
 }
 
 linechart = (container, dataset) => {
-  const margin = ({top: 20, right: 30, bottom: 40, left: 50})
+  const margin = ({top: 20, right: 30, bottom: 40, left: 70})
   const height = 400
   
     document.getElementById(container.substr(1)).innerHTML = '';
