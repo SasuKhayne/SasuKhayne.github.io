@@ -22,6 +22,7 @@ getFrequency = (array) => {
 
 function filtre_rank(d) {
   if (rank.includes(String(d.avg_match_rank))) {
+    console.log(rank)
     return d
   }
 }
