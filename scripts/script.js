@@ -480,7 +480,8 @@ function BarChartEco(container, data, {
 
   // Compute default domains, and unique the x-domain.
   if (xDomain === undefined) xDomain = [-30000,30000];
-  if (yDomain === undefined) yDomain = [d3.min(Y), d3.max(Y)];
+  if (yDomain === undefined) yDomain = [0.5 + d3.min(Y), 0.5 + d3.max(Y)];
+  const yDomain1 = [0.5 + d3.min(Y),0.5 + d3.max(Y)];
 
   const bandwidth = (height - marginLeft - marginRight)/(d3.max(xDomain) - d3.min(xDomain) +1 )*1000
 
@@ -490,18 +491,11 @@ function BarChartEco(container, data, {
   // Construct scales, axes, and formats.
   const xScale =  d3.scaleLinear(xDomain, xRange);
   const yScale = yType(yDomain, yRange);
+  const yScale1 = yType(yDomain1, yRange);
   const xAxis = d3.axisBottom(xScale).tickSizeOuter(0);
   const yAxis = d3.axisLeft(yScale).ticks(height / 20, yFormat);
+  const yAxis1 = d3.axisLeft(yScale1).ticks(height / 20, yFormat);
 
-    // Compute titles.
-  if (title === undefined) {
-    const formatValue = yScale.tickFormat(100, yFormat);
-    title = i => `${data[i]}\n${formatValue(data[i])}`;
-  } else {
-    const O = d3.map(data, d => d);
-    const T = title;
-    title = i => T(O[i], i, data);
-  }
   document.getElementById(container.substr(1)).innerHTML = '';
   const svg = d3.select(container).append("svg")
       .attr("width", width)
@@ -511,7 +505,7 @@ function BarChartEco(container, data, {
 
   svg.append("g")
       .attr("transform", `translate(${marginLeft},0)`)
-      .call(yAxis)
+      .call(yAxis1)
       .call(g => g.select(".domain").remove())
       .call(g => g.selectAll(".tick line").clone()
           .attr("x2", width - marginLeft - marginRight)
@@ -757,7 +751,7 @@ dmg_dist = dmg_distance(data, wp);
 BarChartEco("#chart_eco", eco_data_rollup, {
   x : d => d[0],
   y : d => d[1],
-  yLabel: "Différence pourcentage de victoire bonus en fonction de la différence d'économie",
+  yLabel: "Pourcentage de victoires en fonction de la différence d'économie",
   width,
   height: 500,
   color: couleur[side]
