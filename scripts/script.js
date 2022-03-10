@@ -480,8 +480,8 @@ function BarChartEco(container, data, {
 
   // Compute default domains, and unique the x-domain.
   if (xDomain === undefined) xDomain = [-30000,30000];
-  if (yDomain === undefined) yDomain = [0.5 + d3.min(Y), 0.5 + d3.max(Y)];
-  const yDomain1 = [0.5 + d3.min(Y),0.5 + d3.max(Y)];
+  if (yDomain === undefined) yDomain = [d3.min(Y),d3.max(Y)];
+  const yDomain1 = [0,1];
 
   const bandwidth = (height - marginLeft - marginRight)/(d3.max(xDomain) - d3.min(xDomain) +1 )*1000
 
