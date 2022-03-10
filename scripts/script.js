@@ -21,8 +21,11 @@ getFrequency = (array) => {
   };
 
 function filtre_rank(d) {
+  console.log(rank)
+  console.log(String(d.avg_match_rank))
+  console.log(rank.includes(String(d.avg_match_rank)))
   if (rank.includes(String(d.avg_match_rank))) {
-    console.log(rank)
+    console.log("yes")
     return d
   }
 }
@@ -683,9 +686,9 @@ async function main(map_var, rank_var, side_var, attr_var, wp_var, round_type_va
 
   // FILTER DATA AND DATA MAP 
 
-  data = data.filter(filtre_map).filter(filtre_rank);
+  data = data.filter(filtre_map);
   
-  data_map = data_map.filter(filtre_map).filter(filtre_rank);
+  data_map = data_map.filter(filtre_map);
 
   // END FILTER 
 
