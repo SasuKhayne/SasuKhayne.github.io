@@ -24,7 +24,7 @@ function filtre_rank(d) {
   // console.log(rank)
   // console.log(String(d.avg_match_rank))
   // console.log(rank.includes(String(d.avg_match_rank)))
-  if (rank.includes(String(d.avg_match_rank))) {
+  if (rank.includes(String(parseInt(d.avg_match_rank)))) {
     console.log("yes")
     return d
   }
