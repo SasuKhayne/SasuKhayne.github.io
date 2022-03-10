@@ -21,9 +21,9 @@ getFrequency = (array) => {
   };
 
 function filtre_rank(d) {
-  console.log(rank)
-  console.log(String(d.avg_match_rank))
-  console.log(rank.includes(String(d.avg_match_rank)))
+  // console.log(rank)
+  // console.log(String(d.avg_match_rank))
+  // console.log(rank.includes(String(d.avg_match_rank)))
   if (rank.includes(String(d.avg_match_rank))) {
     console.log("yes")
     return d
@@ -170,6 +170,198 @@ weapon_list = (array) => {
   });
   return wp;
 };
+
+
+linechart = (container, dataset) => {
+  const margin = ({top: 20, right: 30, bottom: 40, left: 70})
+  const height = 400
+  
+    document.getElementById(container.substr(1)).innerHTML = '';
+    const svg = d3.select(container).append("svg")
+      .attr("width", width)
+      .attr("height", height)
+  
+    const x = d3.scaleBand()
+      .domain(d3.range(5, 300, 5))
+      .range([margin.left, width - margin.right])
+    
+    const y = d3.scaleLinear()
+      .domain([d3.max(dataset, d => +d.dmg), 0])
+      .range([margin.top, height - margin.bottom])
+    
+    svg.append("g").attr("transform", `translate(${margin.left}, 0)`).selectAll("rect")
+      .data(dataset)
+      .enter()
+      .append("rect")
+      .attr("x", d => x(+d.distance) )
+      .attr("y", d => y(+d.dmg))
+      .attr("width", x.bandwidth())
+      .attr("height", d => height - y(+d.dmg) - margin.bottom)
+      .attr("fill", couleur[side])
+      .attr("stroke", "#000000")
+  
+    svg.append("text")
+      .attr("class", "y label")
+      .attr("text-anchor", "end")
+      .attr("x", width)
+      .attr("y", height-1)
+      .attr("style","fill:white;")
+      .text("Distance (en mètres)");
+  
+    svg.append("text")
+      .attr("class", "y label")
+      .attr("text-anchor", "end")
+      .attr("y", 5)
+      .attr("x", 0)
+      .attr("dy", ".75em")
+      .attr("transform", "rotate(-90)")
+      .attr("style","fill:white;")
+      .text("Fréquence");
+  
+  let xAxis = g => g
+      .attr("transform", `translate(0,${height - margin.bottom})`)
+      .call(d3.axisBottom( d3.scaleBand()
+      .domain(d3.range(5, 300, 20))
+      .range([margin.left, width - margin.right])))
+  
+  let yAxis = g => g
+      .attr("transform", `translate(${margin.left},0)`)
+      .call(d3.axisLeft(y))
+  
+  // xAxis(svg.append("g"))
+    svg.append("g")
+        .call(xAxis);
+  
+    svg.append("g")
+        .call(yAxis);
+  
+    return svg.node()
+  }
+
+  densityplot = (container, dataset, side, attr) => {
+    document.getElementById(container.substr(1)).innerHTML = '';
+    const svg = d3.select(container).append("svg").attr("width", 512).attr("height", 512);
+      
+      var node = svg.selectAll("g.node")
+        .data(dataset)
+        
+      var nodeEnter = node.enter()
+        .append("svg:g")
+        .attr("class", "node")
+      
+    var defs = nodeEnter.append("defs");
+    defs.append('pattern')
+      .attr("id", "map"  )
+      .attr("width", 1)
+      .attr("height", 1)
+      .append("svg:image")
+      .attr("xlink:href", "images/maps/"+map+".png")
+      .attr("width", 512)
+      .attr("height", 512);
+    
+      nodeEnter.append("svg:rect")
+          .attr("x", d => 0)
+          .attr("y", d => 0)  
+          .attr("fill","url(#map)")
+          .attr("width", 512)
+          .attr("height", 512);
+    
+      svg.append("g")
+          .attr("fill", "none")
+          .attr("stroke", couleur[side])
+          .attr("stroke-linejoin", "round")
+        .selectAll("path")
+        .data(contours(data, attr))
+        .join("path")
+          .attr("stroke-width", d => d.value*4/d3.max(contours(data, attr), d => d.value))
+          .attr("fill", d => couleur[side]) //color(d.value)
+          .attr("fill-opacity", d => d.value/d3.max(contours(data, attr), d => d.value))
+          .attr("d", d3.geoPath());
+      
+      return svg.node();
+    }
+
+shotplot = (container, dataset, side, attr) => {
+  document.getElementById(container.substr(1)).innerHTML = '';
+  const svg = d3.select(container).append("svg").attr("width", 512).attr("height", 512);
+    
+    var node = svg.selectAll("g.node")
+      .data(dataset)
+      
+    var nodeEnter = node.enter()
+      .append("svg:g")
+      .attr("class", "node")
+    
+  var defs = nodeEnter.append("defs");
+  defs.append('pattern')
+    .attr("id", "map"  )
+    .attr("width", 1)
+    .attr("height", 1)
+    .append("svg:image")
+    .attr("xlink:href", "images/maps/"+map+".png")
+    .attr("width", 512)
+    .attr("height", 512);
+  
+    nodeEnter.append("svg:rect")
+        .attr("x", d => 0)
+        .attr("y", d => 0)  
+        .attr("fill","url(#map)")
+        .attr("width", 512)
+        .attr("height", 512);
+  
+    const g = svg.append("g");
+  
+  // Set the gradient
+  if(attr=="att"){
+    var os = other_side(side);
+    var s = side;
+    }
+    else {
+      var s = other_side(side);
+      var os = side;
+    }
+    dataset.filter(filtre_side).filter(filtre_wp).forEach(item => {
+      svg.append("linearGradient")
+        .attr("id", "line-gradient"+item['id'])
+        .attr("gradientUnits", "userSpaceOnUse")
+        .attr("x1", item['vic_pos_x']/2)
+        .attr("y1", item['vic_pos_y']/2)
+        .attr("x2", item['att_pos_x']/2)
+        .attr("y2", item['att_pos_y']/2)
+        .selectAll("stop")
+        .data([
+          {offset: "0%", color: couleur[os]},
+          {offset: "100%", color: couleur[s]}
+        ])
+        .enter().append("stop")
+        .attr("offset", function(d) { return d.offset; })
+        .attr("stop-color", function(d) { return d.color; });
+    });
+  
+    g.selectAll('line')
+      .data(dataset.filter(filtre_side).filter(filtre_wp))
+      .enter()
+      .append('line')
+      .attr("stroke", d=> "url(#line-gradient"+d['id']+")" )
+      .style("stroke-width", 1)
+      .attr("x1", d => d['vic_pos_x']/2)
+      .attr("y1", d => d['vic_pos_y']/2)
+      .attr("x2", d => d['att_pos_x']/2)
+      .attr("y2", d => d['att_pos_y']/2); 
+    
+    return svg.node();
+  }
+
+map_vierge = (container) => {
+  var div = document.getElementById(container.substr(1));
+  div.innerHTML = '';
+  var option = document.createElement("img");
+  option.src = "images/maps/"+map+".png";
+  option.width = 512;
+  option.height = 512;
+  div.appendChild(option);
+  }
+
 
 
 // Copyright 2021 Observable, Inc.
@@ -470,195 +662,6 @@ function BarChart(container, data, {
   return svg.node();
 }
 
-linechart = (container, dataset) => {
-  const margin = ({top: 20, right: 30, bottom: 40, left: 70})
-  const height = 400
-  
-    document.getElementById(container.substr(1)).innerHTML = '';
-    const svg = d3.select(container).append("svg")
-      .attr("width", width)
-      .attr("height", height)
-  
-    const x = d3.scaleBand()
-      .domain(d3.range(5, 300, 5))
-      .range([margin.left, width - margin.right])
-    
-    const y = d3.scaleLinear()
-      .domain([d3.max(dataset, d => +d.dmg), 0])
-      .range([margin.top, height - margin.bottom])
-    
-    svg.append("g").attr("transform", `translate(${margin.left}, 0)`).selectAll("rect")
-      .data(dataset)
-      .enter()
-      .append("rect")
-      .attr("x", d => x(+d.distance) )
-      .attr("y", d => y(+d.dmg))
-      .attr("width", x.bandwidth())
-      .attr("height", d => height - y(+d.dmg) - margin.bottom)
-      .attr("fill", couleur[side])
-      .attr("stroke", "#000000")
-  
-    svg.append("text")
-      .attr("class", "y label")
-      .attr("text-anchor", "end")
-      .attr("x", width)
-      .attr("y", height-1)
-      .attr("style","fill:white;")
-      .text("Distance (en mètres)");
-  
-    svg.append("text")
-      .attr("class", "y label")
-      .attr("text-anchor", "end")
-      .attr("y", 5)
-      .attr("x", 0)
-      .attr("dy", ".75em")
-      .attr("transform", "rotate(-90)")
-      .attr("style","fill:white;")
-      .text("Fréquence");
-  
-  let xAxis = g => g
-      .attr("transform", `translate(0,${height - margin.bottom})`)
-      .call(d3.axisBottom( d3.scaleBand()
-      .domain(d3.range(5, 300, 20))
-      .range([margin.left, width - margin.right])))
-  
-  let yAxis = g => g
-      .attr("transform", `translate(${margin.left},0)`)
-      .call(d3.axisLeft(y))
-  
-  // xAxis(svg.append("g"))
-    svg.append("g")
-        .call(xAxis);
-  
-    svg.append("g")
-        .call(yAxis);
-  
-    return svg.node()
-  }
-
-  densityplot = (container, dataset, side, attr) => {
-    document.getElementById(container.substr(1)).innerHTML = '';
-    const svg = d3.select(container).append("svg").attr("width", 512).attr("height", 512);
-      
-      var node = svg.selectAll("g.node")
-        .data(dataset)
-        
-      var nodeEnter = node.enter()
-        .append("svg:g")
-        .attr("class", "node")
-      
-    var defs = nodeEnter.append("defs");
-    defs.append('pattern')
-      .attr("id", "map"  )
-      .attr("width", 1)
-      .attr("height", 1)
-      .append("svg:image")
-      .attr("xlink:href", "images/maps/"+map+".png")
-      .attr("width", 512)
-      .attr("height", 512);
-    
-      nodeEnter.append("svg:rect")
-          .attr("x", d => 0)
-          .attr("y", d => 0)  
-          .attr("fill","url(#map)")
-          .attr("width", 512)
-          .attr("height", 512);
-    
-      svg.append("g")
-          .attr("fill", "none")
-          .attr("stroke", couleur[side])
-          .attr("stroke-linejoin", "round")
-        .selectAll("path")
-        .data(contours(data, attr))
-        .join("path")
-          .attr("stroke-width", d => d.value*4/d3.max(contours(data, attr), d => d.value))
-          .attr("fill", d => couleur[side]) //color(d.value)
-          .attr("fill-opacity", d => d.value/d3.max(contours(data, attr), d => d.value))
-          .attr("d", d3.geoPath());
-      
-      return svg.node();
-    }
-
-shotplot = (container, dataset, side, attr) => {
-  document.getElementById(container.substr(1)).innerHTML = '';
-  const svg = d3.select(container).append("svg").attr("width", 512).attr("height", 512);
-    
-    var node = svg.selectAll("g.node")
-      .data(dataset)
-      
-    var nodeEnter = node.enter()
-      .append("svg:g")
-      .attr("class", "node")
-    
-  var defs = nodeEnter.append("defs");
-  defs.append('pattern')
-    .attr("id", "map"  )
-    .attr("width", 1)
-    .attr("height", 1)
-    .append("svg:image")
-    .attr("xlink:href", "images/maps/"+map+".png")
-    .attr("width", 512)
-    .attr("height", 512);
-  
-    nodeEnter.append("svg:rect")
-        .attr("x", d => 0)
-        .attr("y", d => 0)  
-        .attr("fill","url(#map)")
-        .attr("width", 512)
-        .attr("height", 512);
-  
-    const g = svg.append("g");
-  
-  // Set the gradient
-  if(attr=="att"){
-    var os = other_side(side);
-    var s = side;
-    }
-    else {
-      var s = other_side(side);
-      var os = side;
-    }
-    dataset.filter(filtre_side).filter(filtre_wp).forEach(item => {
-      svg.append("linearGradient")
-        .attr("id", "line-gradient"+item['id'])
-        .attr("gradientUnits", "userSpaceOnUse")
-        .attr("x1", item['vic_pos_x']/2)
-        .attr("y1", item['vic_pos_y']/2)
-        .attr("x2", item['att_pos_x']/2)
-        .attr("y2", item['att_pos_y']/2)
-        .selectAll("stop")
-        .data([
-          {offset: "0%", color: couleur[os]},
-          {offset: "100%", color: couleur[s]}
-        ])
-        .enter().append("stop")
-        .attr("offset", function(d) { return d.offset; })
-        .attr("stop-color", function(d) { return d.color; });
-    });
-  
-    g.selectAll('line')
-      .data(dataset.filter(filtre_side).filter(filtre_wp))
-      .enter()
-      .append('line')
-      .attr("stroke", d=> "url(#line-gradient"+d['id']+")" )
-      .style("stroke-width", 1)
-      .attr("x1", d => d['vic_pos_x']/2)
-      .attr("y1", d => d['vic_pos_y']/2)
-      .attr("x2", d => d['att_pos_x']/2)
-      .attr("y2", d => d['att_pos_y']/2); 
-    
-    return svg.node();
-  }
-
-map_vierge = (container) => {
-  var div = document.getElementById(container.substr(1));
-  div.innerHTML = '';
-  var option = document.createElement("img");
-  option.src = "images/maps/"+map+".png";
-  option.width = 512;
-  option.height = 512;
-  div.appendChild(option);
-  }
 
 
 async function main(map_var, rank_var, side_var, attr_var, wp_var, round_type_var) {
@@ -686,7 +689,7 @@ async function main(map_var, rank_var, side_var, attr_var, wp_var, round_type_va
 
   // FILTER DATA AND DATA MAP 
 
-  data = data.filter(filtre_map);
+  data = data.filter(filtre_map).filter(filtre_rank);
   
   data_map = data_map.filter(filtre_map);
 
@@ -800,8 +803,6 @@ BarChart("#chart_histo1", weapons_mod, {
   height: 500,
   color: couleur[side]
 })
-
-
 
 }
 
