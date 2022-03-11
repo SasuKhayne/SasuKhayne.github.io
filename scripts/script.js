@@ -172,7 +172,7 @@ function legend(container) {
 
   const width = 1000
   const height = 200
-  const svg = d3.create("svg")
+  const svg = d3.select(container).append("svg")
     .attr("width", width)
     .attr("height", height)
     .attr("viewBox", [0, 0, width, height]);
