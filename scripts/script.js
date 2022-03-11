@@ -218,7 +218,7 @@ svg.append('rect')
 .attr("fill", "#2B53DE");
 
 svg.append('text')
-  .style("stroke", "white")
+  .attr("fill", "white")
   .attr("class", "y label")
   .attr("text-anchor", "end")
   .attr("x", 150)
@@ -226,7 +226,7 @@ svg.append('text')
   .text("Counter Terrorist");
 
   svg.append('text')
-  .style("stroke", "white")
+  .attr("fill", "white")
   .attr("class", "y label")
   .attr("text-anchor", "end")
   .attr("x", 85)
@@ -234,7 +234,7 @@ svg.append('text')
   .text("Terrorist");
 
   svg.append('text')
-  .style("stroke", "white")
+  .attr("fill", "white")
   .attr("class", "y label")
   .attr("text-anchor", "end")
   .attr("x", 580)
