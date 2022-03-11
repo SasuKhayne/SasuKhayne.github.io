@@ -439,7 +439,7 @@ shotplot = (container, dataset, side, attr) => {
         .data(dataset.filter(filtre_side).filter(filtre_wp))
         .enter()
         .append('line')
-        .attr("stroke", d=> "url(#line-gradient"+d['id']+")" )
+        .attr("stroke", d=> "url(#line-gradient"+d['']+")" )
         .style("stroke-width", 1)
         .attr("x1", d => d['vic_pos_x']/2)
         .attr("y1", d => d['vic_pos_y']/2)
