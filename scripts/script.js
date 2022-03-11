@@ -377,7 +377,7 @@ shotplot = (container, dataset, side, attr) => {
     
   //   return svg.node();
 
-  
+
     document.getElementById(container.substr(1)).innerHTML = '';
     const svg = d3.select(container).append("svg").attr("width", 512).attr("height", 512);
       
@@ -416,6 +416,7 @@ shotplot = (container, dataset, side, attr) => {
         var s = other_side(side);
         var os = side;
       }
+      console.log(dataset.filter(filtre_side).filter(filtre_wp))
       dataset.filter(filtre_side).filter(filtre_wp).forEach(item => {
         svg.append("linearGradient")
           .attr("id", "line-gradient"+item['id'])
