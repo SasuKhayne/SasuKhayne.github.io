@@ -1,4 +1,4 @@
-,file,map,round,seconds,att_side,vic_side,hp_dmg,bomb_site,wp,award,winner_side,att_pos_x,att_pos_y,vic_pos_x,vic_pos_y,round_type,ct_eq_val,t_eq_val,avg_match_rank
+id,file,map,round,seconds,att_side,vic_side,hp_dmg,bomb_site,wp,award,winner_side,att_pos_x,att_pos_y,vic_pos_x,vic_pos_y,round_type,ct_eq_val,t_eq_val,avg_match_rank
 0,003201673717864202280_0171883906.dem,de_dust2,1,133.0582,CounterTerrorist,Terrorist,100,,USP,300,CounterTerrorist,879.0,467.0,698.0,596.0,PISTOL_ROUND,2950,3850,16.0
 0,003201673717864202280_0171883906.dem,de_dust2,1,133.0582,CounterTerrorist,Terrorist,100,,USP,300,CounterTerrorist,879.0,467.0,698.0,596.0,PISTOL_ROUND,2950,3850,16.0
 1,003201673717864202280_0171883906.dem,de_dust2,1,134.9023,CounterTerrorist,Terrorist,25,,USP,300,CounterTerrorist,282.0,532.0,289.0,511.0,PISTOL_ROUND,2950,3850,16.0

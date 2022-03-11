@@ -419,7 +419,7 @@ shotplot = (container, dataset, side, attr) => {
       console.log(dataset.filter(filtre_side).filter(filtre_wp))
       dataset.filter(filtre_side).filter(filtre_wp).forEach(item => {
         svg.append("linearGradient")
-          .attr("id", "line-gradient"+item[''])
+          .attr("id", "line-gradient"+item['id'])
           .attr("gradientUnits", "userSpaceOnUse")
           .attr("x1", item['vic_pos_x']/2)
           .attr("y1", item['vic_pos_y']/2)
@@ -439,7 +439,7 @@ shotplot = (container, dataset, side, attr) => {
         .data(dataset.filter(filtre_side).filter(filtre_wp))
         .enter()
         .append('line')
-        .attr("stroke", d=> "url(#line-gradient"+d['']+")" )
+        .attr("stroke", d=> "url(#line-gradient"+d['id']+")" )
         .style("stroke-width", 1)
         .attr("x1", d => d['vic_pos_x']/2)
         .attr("y1", d => d['vic_pos_y']/2)
