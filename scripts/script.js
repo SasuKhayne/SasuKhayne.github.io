@@ -168,6 +168,79 @@ weapon_list = (array) => {
   return wp;
 };
 
+function legend(container) {
+
+  const width = 1000
+  const height = 200
+  const svg = d3.create("svg")
+    .attr("width", width)
+    .attr("height", height)
+    .attr("viewBox", [0, 0, width, height]);
+
+
+svg.append("linearGradient")
+.attr("id", "line-gradient")
+.attr("gradientUnits", "userSpaceOnUse")
+.attr("x1", 0)
+.attr("x2", 100)
+.attr("y1", 10)
+.attr("y2", 10)
+.selectAll("stop")
+  .data([
+    {offset: "0%", color: "#D37F21"},
+    {offset: "100%", color: "#2B53DE"}
+  ])
+  .enter().append("stop")
+  .attr("offset", d => d.offset)
+  .attr("stop-color", d => d.color);
+
+
+  svg.append('line')
+  .style("stroke", "url(#line-gradient)")
+  .style("stroke-width", 2.1)
+  .attr("x1", 0)
+  .attr("y1", 10)
+  .attr("x2", 100)
+  .attr("y2", 10); 
+
+ svg.append('rect')
+  .attr("x", 0)
+  .attr("y", 30)
+  .attr("height", 10)
+  .attr("width", 10)
+.attr("fill", "#D37F21"); 
+
+svg.append('rect')
+  .attr("x", 0)
+  .attr("y", 60)
+  .attr("height", 10)
+  .attr("width", 10)
+.attr("fill", "#2B53DE");
+
+svg.append('text')
+  .attr("class", "y label")
+  .attr("text-anchor", "end")
+  .attr("x", 150)
+  .attr("y", 71)
+  .text("Counter Terrorist");
+
+  svg.append('text')
+  .attr("class", "y label")
+  .attr("text-anchor", "end")
+  .attr("x", 85)
+  .attr("y", 41)
+  .text("Terrorist");
+
+  svg.append('text')
+  .attr("class", "y label")
+  .attr("text-anchor", "end")
+  .attr("x", 580)
+  .attr("y", 15)
+  .text("Ligne de tir entre Terrorist (Orange) et Counter Terrorist (Bleu)");
+
+
+return svg.node();
+}
 
 linechart = (container, dataset) => {
   const margin = ({top: 20, right: 30, bottom: 40, left: 70})
@@ -896,6 +969,8 @@ BarChart("#chart_histo1", weapons_mod, {
   height: 500,
   color: couleur[side]
 })
+
+legend("#legende");
 
 }
 
