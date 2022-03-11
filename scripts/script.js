@@ -170,6 +170,7 @@ weapon_list = (array) => {
 
 function legend(container) {
 
+  document.getElementById(container.substr(1)).innerHTML = '';
   const width = 1000
   const height = 90
   const svg = d3.select(container).append("svg")
